@@ -1,0 +1,35 @@
+.meraki-search {
+    background-image: url('../images/searchicon.png');
+    background-size: 25px, 25px;
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+.meraki-font-s1 {
+    font-family: 'Yellowtail', cursive;
+}
+
+.meraki-font-s2 {
+    font-family: 'Poiret One', cursive;
+}
+
+.meraki-font-s3 {
+    font-family: 'Playfair Display SC', cursive;
+}
+
+.meraki-font-s4 {
+    font-family: 'Great Vibes', cursive;
+}
+
+.meraki-font-s5 {
+    font-family: 'Lato', sans-serif;
+}
+
+.meraki-border {
+    border-bottom-style: solid;
+    border-bottom-color: #f8a300;
+}

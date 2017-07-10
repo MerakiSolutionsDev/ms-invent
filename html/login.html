@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inventarios y Kardex</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-ana.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Antic+Slab|Cabin+Sketch|Great+Vibes|Playfair+Display+SC|Poiret+One|Yellowtail" rel="stylesheet">
+
+    <style media="screen">
+        .bg {
+
+            background-image: url("../images/prod-bg.jpg");
+
+            height: 100vh;
+
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .meraki-font-s1 {
+            font-family: 'Yellowtail', cursive;
+        }
+
+        .meraki-font-s2 {
+            font-family: 'Poiret One', cursive;
+        }
+
+        .meraki-font-s3 {
+            font-family: 'Playfair Display SC', cursive;
+        }
+
+        .meraki-font-s4 {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        .meraki-font-s5 {
+            font-family: 'Cabin Sketch', cursive;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="w3-display-container bg" style="width: 100vw; height: 100vh;">
+        <div class="w3-display-middle w3-center w3-card-4" style="background-color: rgba(175, 141, 129, 0.4); border-radius: 10px 10px 10px 10px;">
+            <div class="w3-container w3-padding-large w3-card-4 w3-ana-502 w3-center" style="border-radius: 10px 10px 0px 0px">
+                <img src="../images/meraki-logo1-alpha.png" alt="Meraki Logo" width="250px" class="w3-hide-large w3-hide-medium">
+                <img src="../images/meraki-logo1-alpha.png" alt="Meraki Logo" width="300px" class="w3-hide-small">
+                <p></p>
+                <div class="w3-container w3-border-top w3-border-bottom">
+                    <h3 class="w3-text-sand meraki-font-s2 w3-xlarge"><strong>Inventarios y Kardex</strong></h3>
+                </div>
+            </div>
+
+            <form class="w3-container" action="../php/checklogin.php" method="post">
+                <p></p>
+                <input class="w3-input w3-border w3-round-xlarge w3-center" type="text" name="uname" placeholder="username">
+                <p></p>
+                <input class="w3-input w3-border w3-round-xlarge w3-center" type="password" name="psw" placeholder="password">
+                <p></p>
+                <input class="meraki-font-s2 w3-border w3-border-sand w3-btn w3-block w3-round-xlarge w3-xlarge" type="submit" name="submitLogin" value="Login" style="background:#d69c50">
+                <p></p>
+                <span><a href="http://www.merakisolutionsdev.com" target="_blank">New user?</a></span><span><p></p></span><span><a href="#" onclick="document.getElementById('forgot-modal').style.display='block'"> Forgot password?</a></span>
+                <p></p>
+            </form>
+
+        </div>
+
+        <div class="w3-display-bottommiddle w3-center">
+            <p class="meraki-font-s2 w3-large">Designed &amp; Powered by Meraki Solutions <sup>&reg;</sup></p>
+        </div>
+    </div>
+
+    <div id="forgot-modal" class="w3-modal">
+        <div class="w3-modal-content w3-card-4">
+            <header class="w3-container w3-sand w3-border-bottom">
+                <span onclick="document.getElementById('forgot-modal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h2 class="meraki-font-s1">Ok, let's try to remember ... </h2>
+            </header>
+            <div class="w3-container">
+                <form class="w3-container" action="../php/sendPass.php" method="post">
+                    <p></p>
+                    <input class="w3-input w3-border w3-round-xlarge w3-center" type="text" name="name" placeholder="user/mail">
+                    <p></p>
+                    <input class="w3-btn w3-black w3-block w3-round-xlarge" type="submit" name="sendPass" value="Send">
+                    <p></p>
+                    <p class="meraki-font-s2 w3-large"><b>Note:</b> After hit Send, please look at your mail inbox and take note of your password.</p>
+                </form>
+            </div>
+            <footer class="w3-container w3-sand w3-border-top">
+                <hr class="w3-border-red">
+            </footer>
+        </div>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    var modal = document.getElementById('forgot-modal');
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</html>

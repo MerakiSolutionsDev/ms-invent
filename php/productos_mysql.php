@@ -1,14 +1,14 @@
 <?php
     SESSION_START();
     if(!isset($_SESSION['db'])){
-        header("Location: http://www.merakisolutionsdev.com/rent/ms-invent/html/login.html");
+        header("Location: http://localhost/meraki-rent/ms-invent/html/login.html");
         exit();
     }
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=UTF-8");
 
     $servername = "localhost";
-    $username = "merakiso";
+    $username = "root";
     $password = "1nj7TkF94h";
     $dbname = $_SESSION['db'];
 

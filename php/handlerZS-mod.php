@@ -2,12 +2,12 @@
     SESSION_START();
     header("Access-Control-Allow-Origin: *");
     if(!isset($_SESSION['db'])){
-        header("Location: http://www.merakisolutionsdev.com/rent/ms-invent/html/login.html");
+        header("Location: http://localhost/meraki-rent/ms-invent/html/login.html");
         exit();
     }
 
     $servername = "localhost";
-    $username = "merakiso";
+    $username = "root";
     $password = "1nj7TkF94h";
     $dbname = $_SESSION['db'];
 

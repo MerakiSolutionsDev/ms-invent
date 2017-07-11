@@ -2,7 +2,7 @@
     SESSION_START();
 
     $servername = "localhost";
-    $username = "merakiso";
+    $username = "root";
     $password = "1nj7TkF94h";
     $dbname = "merakiso_ms-invent";
 
@@ -24,10 +24,11 @@
     if (!preg_match("/^[a-zA-Z]*$/",$uname) or !preg_match("/^[a-zA-Z0-9]*$/",$psw)) {
       $loginMsg = "Parece que no se ingreso un nombre o clave correcta!";
     }else{
-        $loginMsg = "Bienvenido! ... lo estamos redireccionando";
+        $loginMsg = "Bienvenido! ... lo estamos redireccionando ...";
+        echo $loginMsg;
         if (mysqli_num_rows($result) > 0) {
               while($row = mysqli_fetch_assoc($result)) {
-                if (($row["uname"] == $uname) and ($row["psw"] == $psw)){
+                if (($row["uname"] == $uname)and($row["psw"] == $psw)){
 
                     $_SESSION['uname'] = $row['uname'];
                     $_SESSION['name'] = $row['name'];
@@ -35,20 +36,19 @@
                     $_SESSION['mail'] = $row['mail'];
                     $_SESSION['type'] = $row['type'];
                     $_SESSION['db'] = $row['db'];
-                    
-                    header("Location: http://www.merakisolutionsdev.com/rent/ms-invent/html/cardexZS.html");
-                    echo $loginMsg;
+
+
+                    header("Location: http://localhost/meraki-rent/ms-invent/html/cardexZS.html");
+
                     break;
                 }else{
-                    $loginMsg = "Parece que el usuario no esta registrado! ... redireccionando a la pagina de login";
+                  $loginMsg = "Parece que el usuario no esta registrado! ... redireccionando a la pagina de login";
 
-                  
-                    header("Location: http://www.merakisolutionsdev.com/rent/ms-invent/html/login.html");
+                  echo $loginMsg;
+
+                  header("Location: http://localhost/meraki-rent/ms-invent/html/login.html");
                 }
-            }
-            echo $loginMsg;
-
-        
+              }
         } else {
               echo "Parece que la lista esta vacia";
         }

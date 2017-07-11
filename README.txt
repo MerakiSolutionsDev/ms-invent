@@ -1,6 +1,6 @@
 MS-INVENT
 
-Es una aplicación web para llevar el control de inventarios y cardex de productos.
+Es una aplicación web para llevar el control de inventarios y kardex de productos.
 
 Actualmente cuenta con las siguientes caracteristicas:
 

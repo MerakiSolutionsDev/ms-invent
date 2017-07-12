@@ -112,7 +112,6 @@
                 </div>
             </div>
 
-
             <!--************ GESTION DE ZONAS o SUCURSALES ***************-->
             <div id="zonas-sucursales" class="cardexBlock w3-container w3-padding w3-animate-top" ng-controller="ZSCtrl" style="display: none; margin-top: 75px;">
                 <div class="w3-container w3-ana-509 w3-card-4 w3-round-medium">
@@ -880,24 +879,24 @@
             </div>
 
             <!--************ EDITAR/ELIMINAR DOCUMENTOS ***************-->
-            <div id="edit-documentos" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="editdocumentos-Ctrl" style="display: none; height: 100vh;margin-top: 10vh;">
-                <div class="w3-container w3-ana-509 w3-card-4">
+            <div id="edit-documentos" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="editdocumentos-Ctrl" style="display: none; margin-top: 75px;">
+                <div class="w3-container w3-ana-509 w3-card-4 w3-round-medium">
                     <h4 class="meraki-font-s6">Editar/Eliminar Documentos</h4>
                 </div>
 
                 <div class="w3-container w3-margin-top meraki-font-s6">
-
-                    <input class="meraki-search w3-input w3-animate-input w3-light-grey" type="text"  ng-model="editdocumentos_filter" style="width:30%">
+                    <input class="meraki-search w3-input w3-animate-input w3-light-grey w3-round-medium" type="text"  ng-model="editdocumentos_filter" style="width:30%" placeholder="filtrar contenido">
                     <p></p>
-                    <button class="w3-btn w3-ana-502 meraki-border-bottom w3-margin-right" type="button" ng-click="exportData_editdocumentos()">Export</button>
-                    <button class="w3-btn w3-ana-502 meraki-border-bottom w3-margin-right" type="button" ng-click="editEnabler()"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Editar</button>
-                    <button class="w3-btn w3-ana-502 meraki-border-bottom w3-margin-right" type="button" ng-click="saveReg()"><i class="fa fa-save fa-fw" aria-hidden="true"></i> Guardar</button>
+                    <button class="w3-btn w3-ana-502 meraki-border-bottom w3-margin-right w3-round-medium" type="button" ng-click="exportData_editdocumentos()">Export</button>
+                    <button class="w3-btn w3-ana-502 meraki-border-bottom w3-margin-right w3-round-medium" type="button" ng-click="editEnabler()"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Editar</button>
+                    <button class="w3-btn w3-ana-502 meraki-border-bottom w3-margin-right w3-round-medium" type="button" ng-click="saveReg()"><i class="fa fa-save fa-fw" aria-hidden="true"></i> Guardar</button>
                 </div>
-                <hr>
+                <hr class="w3-border w3-border-red">
+
                 <div class="w3-container w3-margin-bottom w3-responsive meraki-font-s6" style="height: 80%;">
 
                     <h4>Resumen</h4>
-                    <table class="w3-table-all w3-card-4">
+                    <table class="w3-table-all w3-card-4 w3-text-dark-grey">
                         <thead class="w3-small">
                             <tr>
                                 <th class="w3-border-right w3-border-gray">Operación</th>
@@ -942,6 +941,9 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="w3-container" style="height:50vh;">
+                    <p></p>
                 </div>
             </div>
 
@@ -1065,7 +1067,7 @@
                 <div ng-show="showTableConsultas" class="w3-section w3-margin-bottom w3-responsive meraki-font-s6" style="height: 80%;">
 
                     <h4>Resumen</h4>
-                    <table class="w3-table-all w3-card-4">
+                    <table class="w3-table-all w3-card-4 w3-text-dark-grey">
                         <thead class="w3-small">
                             <tr>
                                 <th class="w3-border-right w3-border-gray">Operación</th>

@@ -1796,6 +1796,17 @@
             document.getElementById("productos-InputDetalles").value = owner.cells[12].innerHTML;
         }
 
+        function activeLink(evt, name, c_name) {
+          var i, links;
+
+          tablinks = document.getElementsByClassName(c_name);
+          for (i = 0; i < x.length; i++) {
+              tablinks[i].className = tablinks[i].className.replace(" w3-dark-gray", "");
+          }
+
+          evt.currentTarget.className += " w3-dark-gray";
+        }
+
 
         $('form.ajax').submit(function() {
             var btn = $(this).find("input[type=submit]:focus").val();

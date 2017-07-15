@@ -70,7 +70,7 @@
 
 <body ng-app="ZSApp">
 
-    <div class="meraki-font-s6 w3-sidebar w3-bar-block w3-card-2 w3-animate-top w3-hide-small" id="sidebarMenu" style="display:none;">
+    <div class="meraki-font-s6 w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-hide-small" id="sidebarMenu" style="display:none;">
         <button class="w3-bar-item w3-button w3-large w3-ana-509" onclick="w3_close()">Close &times;</button>
         <a title="Aquí puede crear nuevas zonas o sucursales" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#zonas-sucursales'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-map-marker fa-fw" aria-hidden="true" style="width:25px"></i> Zonas o Sucursales</a>
         <a title="Aquí puede crear nuevos clientes, proveedores o internos" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#terceros'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-users fa-fw" aria-hidden="true" style="width:25px"></i> Terceros</a>
@@ -83,7 +83,7 @@
         <a title="Aquí puede descargar informes especificos en formato Excel" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#informes'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-book fa-fw" aria-hidden="true" style="width:25px"></i>&nbsp; Informes</a>
     </div>
 
-    <div class="meraki-font-s6 w3-sidebar w3-bar-block w3-card-2 w3-animate-top w3-hide-large w3-hide-medium" id="sidebarMenu-small" style="display:none;">
+    <div class="meraki-font-s6 w3-sidebar w3-bar-block w3-card-2 w3-animate-left w3-hide-large w3-hide-medium" id="sidebarMenu-small" style="display:none;">
         <button class="w3-bar-item w3-button w3-large w3-ana-509" onclick="w3_close();">Close &times;</button>
         <a title="Aquí puede crear nuevas zonas o sucursales" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#zonas-sucursales'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-map-marker fa-fw" aria-hidden="true" style="width:25px"></i> Zonas o Sucursales</a>
         <a title="Aquí puede crear nuevos clientes, proveedores o internos" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#terceros'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-users fa-fw" aria-hidden="true" style="width:25px"></i> Terceros</a>
@@ -1361,14 +1361,14 @@
                 $scope.moneda = row[0].cells[7].innerHTML;
                 $scope.compra = row[0].cells[8].innerHTML;
                 $scope.setDocTipo();
-                //alert('prodID: ' + prodID);
+                alert('prodID: ' + prodID);
                 if (prodID !== $scope.workProdIndex) {
 
                     $scope.workProdIndex = prodID;
-                    //alert('outside' + ' ' + $scope.temp_stock);
+                    alert('outside' + ' ' + $scope.temp_stock);
                     if ($scope.temp_stock.length === 0) {
                         $scope.temp_stock.push({"index":$scope.workProdIndex,"stock":0});
-                        //alert('inside' + ' ' + $scope.temp_stock[$scope.workProdIndex - 1].stock);
+                        alert('inside' + ' ' + $scope.temp_stock[$scope.workProdIndex - 1].stock);
                     }else {
                         var already = false;
                         for (var i = 0; i < $scope.temp_stock.length; i++) {
@@ -1378,7 +1378,7 @@
                             }
                         }
                         if (!already) {
-                            //alert('item added');
+                            alert('item added');
                             $scope.temp_stock.push({"index":$scope.workProdIndex,"stock":0});
                         }
                     }

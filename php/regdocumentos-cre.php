@@ -34,7 +34,7 @@
 
         for ($i=0; $i < count($data); $i++) {
 
-            $id_resumen = $i;
+            $id_resumen = $i + 1;
             $_fecha      = mysqli_real_escape_string($connect, $data[$i]->Fecha);
             $_doc        = mysqli_real_escape_string($connect, $data[$i]->Doc);
             $_docnum     = mysqli_real_escape_string($connect, $data[$i]->Docnum);

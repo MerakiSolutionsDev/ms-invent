@@ -18,7 +18,7 @@
     <script src="../javascript/w3data.js"></script>
     <script src="../javascript/jquery-dateFormat.min.js"></script>
     <script src="../javascript/merakiScripting.js"></script>
-    <title>Inventarios y Kardex</title>
+    <title>Inventarios y Cardex</title>
     <style media="screen">
         .meraki-search {
             background-image: url('../images/searchicon.png');
@@ -79,7 +79,7 @@
         <a title="Aquí puede crear nuevos productos" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#productos'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-product-hunt fa-fw" aria-hidden="true" style="width:25px"></i> Productos</a>
         <a title="Aquí puede registrar el movimiento de mercancía, utilizando todos los datos creados anteriormente" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#regdocumentos'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-pencil-square-o fa-fw" aria-hidden="true" style="width:25px"></i> Registrar Movimientos</a>
         <a title="Aquí puede editar los movimientos realizados" href="" class="w3-bar-item w3-button w3-border-bottom w3-border-black meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#edit-documentos'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-pencil fa-fw" aria-hidden="true" style="width:25px"></i> Editar Movimientos</a>
-        <a title="Aquí puede consultas sobre los movimientos de sus productos" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#consultas'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-flag fa-fw" aria-hidden="true" style="width:25px"></i> Kardex</a>
+        <a title="Aquí puede consultas sobre los movimientos de sus productos" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#consultas'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-flag fa-fw" aria-hidden="true" style="width:25px"></i> Cardex</a>
         <a title="Aquí puede descargar informes especificos en formato Excel" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#informes'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-book fa-fw" aria-hidden="true" style="width:25px"></i>&nbsp; Informes</a>
     </div>
 
@@ -92,7 +92,7 @@
         <a title="Aquí puede crear nuevos productos" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#productos'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-product-hunt fa-fw" aria-hidden="true" style="width:25px"></i> Productos</a>
         <a title="Aquí puede registrar el movimiento de mercancía, utilizando todos los datos creados anteriormente" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#regdocumentos'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-pencil-square-o fa-fw" aria-hidden="true" style="width:25px"></i> Registrar Movimientos</a>
         <a title="Aquí puede editar los movimientos realizados" href="" class="w3-bar-item w3-button w3-border-bottom w3-border-black meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#edit-documentos'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-pencil fa-fw" aria-hidden="true" style="width:25px"></i> Editar Movimientos</a>
-        <a title="Aquí puede consultas sobre los movimientos de sus productos" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#consultas'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-flag fa-fw" aria-hidden="true" style="width:25px"></i> Kardex</a>
+        <a title="Aquí puede consultas sobre los movimientos de sus productos" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#consultas'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-flag fa-fw" aria-hidden="true" style="width:25px"></i> ardex</a>
         <a title="Aquí puede descargar informes especificos en formato Excel" href="" class="w3-bar-item w3-button w3-border-bottom meraki-nav-class" onclick="w3.hide('.cardexBlock'); w3.show('#informes'); w3_close(); activeLink(event, 'meraki-nav-class')"><i class="fa fa-book fa-fw" aria-hidden="true" style="width:25px"></i>&nbsp; Informes</a>
     </div>
 
@@ -629,7 +629,7 @@
             <!--************ REGISTRAR MOVIMIENTOS ***************-->
             <div id="regdocumentos" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="regdocumentos-Ctrl" style="display: none; margin-top: 75px;">
                 <div class="w3-container w3-ana-509 w3-card-4 w3-round-medium">
-                    <h4 class="meraki-font-s6">Registrar de Documentos</h4>
+                    <h4 class="meraki-font-s6">Registrar Movimientos</h4>
                 </div>
 
                 <div class="w3-row">
@@ -766,7 +766,7 @@
 
                 <!--PRIMERA TABLA-->
                 <div class="w3-container w3-margin-top w3-margin-bottom w3-responsive">
-
+                    <h4>Lista de Productos</h4>
                     <table class="w3-table-all w3-card-4 w3-text-dark-grey">
                         <tr>
                             <th ng-click="orderByMe('ID')">ID</th>
@@ -841,8 +841,8 @@
                             <th>ID</th>
                             <th>Fecha</th>
                             <th>Doc.</th>
-                            <th>N.Doc</th>
-                            <th>N.Guía</th>
+                            <th>N°Doc</th>
+                            <th>N°Guía</th>
                             <th>Tercero</th>
                             <th>Detalle</th>
                             <th>ID Prod.</th>
@@ -939,12 +939,12 @@
                                 <th>ID Prod.</th>
                                 <th>Prod.</th>
                                 <th class="w3-border-right w3-border-gray">Moneda</th>
-                                <th>(S)Cantidad</th>
-                                <th>(S)P.Unitario</th>
-                                <th>(S)Total</th>
                                 <th>(E)Cantidad</th>
                                 <th>(E)P.Unitario</th>
-                                <th class="w3-border-right w3-border-gray">(E)Total</th>
+                                <th>(E)Total</th>
+                                <th>(S)Cantidad</th>
+                                <th>(S)P.Unitario</th>
+                                <th class="w3-border-right w3-border-gray">(S)Total</th>
                                 <th>Stock</th>
                             </tr>
                         </thead>
@@ -961,12 +961,12 @@
                                 <td><input type="text" value="{{ x.IDProd }}" style="width:100%;" ng-disabled="editEnable"></td>
                                 <td><input type="text" value="{{ x.Prod }}" style="width:100%;" ng-disabled="editEnable"></td>
                                 <td class="w3-border-right w3-border-gray"><input type="text" value="{{ x.Moneda}}" style="width:100%;" ng-disabled="editEnable"></td>
-                                <td><input type="text" value="{{ x.SCantidad }}" style="width:100%;" ng-disabled="editEnable"></td>
-                                <td><input type="text" value="{{ x.SPUnitario }}" style="width:100%;" ng-disabled="editEnable"></td>
-                                <td><input type="text" value="{{ x.STotal }}" style="width:100%;" ng-disabled="editEnable"></td>
                                 <td><input type="text" value="{{ x.ECantidad }}" style="width:100%;" ng-disabled="editEnable"></td>
                                 <td><input type="text" value="{{ x.EPUnitario }}" style="width:100%;" ng-disabled="editEnable"></td>
-                                <td class="w3-border-right w3-border-gray"><input type="text" value="{{ x.ETotal }}" style="width:100%;" ng-disabled="editEnable"></td>
+                                <td><input type="text" value="{{ x.ETotal }}" style="width:100%;" ng-disabled="editEnable"></td>
+                                <td><input type="text" value="{{ x.SCantidad }}" style="width:100%;" ng-disabled="editEnable"></td>
+                                <td><input type="text" value="{{ x.SPUnitario }}" style="width:100%;" ng-disabled="editEnable"></td>
+                                <td class="w3-border-right w3-border-gray"><input type="text" value="{{ x.STotal }}" style="width:100%;" ng-disabled="editEnable"></td>
                                 <td class="w3-border-right w3-border-gray"><input type="text" value="{{ x.Stock }}" style="width:100%;" ng-disabled="editEnable"></td>
                             </tr>
                         </tbody>
@@ -977,8 +977,8 @@
                 </div>
             </div>
 
-            <!--************ KARDEX ***************-->
-            <div id="consultas" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="consultas-Ctrl" style="display: none; height: 100vh;margin-top: 10vh;">
+            <!--************ CARDEX ***************-->
+            <div id="consultas" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="consultas-Ctrl" style="display: none; margin-top: 75px;">
                 <div class="w3-container w3-ana-509 w3-card-4">
                     <h4 class="meraki-font-s6">Cardex</h4>
                 </div>
@@ -1101,7 +1101,7 @@
                         <thead class="w3-small">
                             <tr>
                                 <th class="w3-border-right w3-border-gray">Operación</th>
-                                <th>ID</th>
+                                <th>Item</th>
                                 <th>Fecha</th>
                                 <th>Doc.</th>
                                 <th class="w3-border-right w3-border-gray">Doc.Num.</th>
@@ -1110,12 +1110,12 @@
                                 <th>ID Prod.</th>
                                 <th>Prod.</th>
                                 <th class="w3-border-right w3-border-gray">Moneda</th>
-                                <th>(S)Cantidad</th>
-                                <th>(S)P.Unitario</th>
-                                <th>(S)Total</th>
                                 <th>(E)Cantidad</th>
                                 <th>(E)P.Unitario</th>
-                                <th class="w3-border-right w3-border-gray">(E)Total</th>
+                                <th>(E)Total</th>
+                                <th>(S)Cantidad</th>
+                                <th>(S)P.Unitario</th>
+                                <th class="w3-border-right w3-border-gray">(S)Total</th>
                                 <th>Stock</th>
                             </tr>
                         </thead>
@@ -1132,24 +1132,24 @@
                                 <td>{{ x.IDProd }}</td>
                                 <td>{{ x.Prod }}</td>
                                 <td class="w3-border-right w3-border-gray">{{ x.Moneda}}</td>
-                                <td>{{ x.SCantidad }}</td>
-                                <td>{{ x.SPUnitario }}</td>
-                                <td>{{ x.STotal }}</td>
                                 <td>{{ x.ECantidad }}</td>
                                 <td>{{ x.EPUnitario }}</td>
-                                <td class="w3-border-right w3-border-gray">{{ x.ETotal }}</td>
+                                <td>{{ x.ETotal }}</td>
+                                <td>{{ x.SCantidad }}</td>
+                                <td>{{ x.SPUnitario }}</td>
+                                <td class="w3-border-right w3-border-gray">{{ x.STotal }}</td>
                                 <td>{{ x.Stock }}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="w3-section" style="height:10vh;">
+                <div class="w3-section" style="height:50vh;">
 
                 </div>
             </div>
 
             <!--************ INFORMES ***************-->
-            <div id="informes" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="ZSCtrl" style="display: none; height: 100vh;margin-top: 10vh;">
+            <div id="informes" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="ZSCtrl" style="display: none;margin-top: 75px;">
                 <div class="w3-container w3-ana-509 w3-card-4">
                     <h4>Informes</h4>
                 </div>
@@ -1361,14 +1361,15 @@
                 $scope.moneda = row[0].cells[7].innerHTML;
                 $scope.compra = row[0].cells[8].innerHTML;
                 $scope.setDocTipo();
-                alert('prodID: ' + prodID);
+                // alert('prodID: ' + prodID);
                 if (prodID !== $scope.workProdIndex) {
 
                     $scope.workProdIndex = prodID;
-                    alert('outside' + ' ' + $scope.temp_stock);
+                    // alert('outside' + ' ' + $scope.temp_stock);
                     if ($scope.temp_stock.length === 0) {
                         $scope.temp_stock.push({"index":$scope.workProdIndex,"stock":0});
-                        alert('inside' + ' ' + $scope.temp_stock[$scope.workProdIndex - 1].stock);
+                        $scope.workProdIndex = 1;
+                        //alert('inside' + ' ' + $scope.temp_stock[0].stock);
                     }else {
                         var already = false;
                         for (var i = 0; i < $scope.temp_stock.length; i++) {
@@ -1378,7 +1379,7 @@
                             }
                         }
                         if (!already) {
-                            alert('item added');
+                            // alert('item added');
                             $scope.temp_stock.push({"index":$scope.workProdIndex,"stock":0});
                         }
                     }

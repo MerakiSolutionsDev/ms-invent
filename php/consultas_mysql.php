@@ -1,6 +1,6 @@
 <?php
     SESSION_START();
-    if(!isset($_SESSION['db'])){
+    if(isset($_SESSION['db'])){
         header("Location: http://localhost/meraki-rent/ms-invent/html/login.html");
         exit();
     }

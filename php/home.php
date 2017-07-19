@@ -1,6 +1,6 @@
 <?php
     SESSION_START();
-    if(isset($_SESSION['db'])){
+    if(!isset($_SESSION['db'])){
         header("Location: http://localhost/meraki-rent/ms-invent/html/login.html");
         exit();
     }
@@ -178,7 +178,7 @@
                             <th ng-click="orderByMe('Telefono')">Teléfono</th>
                             <th ng-click="orderByMe('Detalle')">Detalles</th>
                         </tr>
-                        <tr class="w3-hover-blue-gray" ng-repeat="x in data_zonasSucursales | orderBy:myOrderBy | filter:zs_filter" onclick="ZS_showCells(this);">
+                        <tr class="zs-table w3-hover-blue-gray" ng-repeat="x in data_zonasSucursales | orderBy:myOrderBy | filter:zs_filter" onclick="ZS_showCells(this); activeLink(event, 'zs-table')">
                             <td>{{ x.ID }}</td>
                             <td>{{ x.Nombre }}</td>
                             <td>{{ x.Direccion }}</td>
@@ -283,7 +283,7 @@
                             <th ng-click="orderByMe('Tel')">Teléfono</th>
                             <th ng-click="orderByMe('Detalles')">Detalles</th>
                         </tr>
-                        <tr class="w3-hover-blue-gray" ng-repeat="x in data_terceros | orderBy:myOrderBy | filter:terceros_filter" onclick="terceros_showCells(this);">
+                        <tr class="terceros-table w3-hover-blue-gray" ng-repeat="x in data_terceros | orderBy:myOrderBy | filter:terceros_filter" onclick="terceros_showCells(this); activeLink(event, 'terceros-table')">
                             <td>{{ x.ID }}</td>
                             <td>{{ x.Identi }}</td>
                             <td>{{ x.IdentiClass }}</td>
@@ -399,7 +399,7 @@
                             <th ng-click="orderByMe('Uso')">Modo de Uso</th>
                             <th ng-click="orderByMe('Detalle')">Detalles</th>
                         </tr>
-                        <tr class="w3-hover-blue-gray" ng-repeat="x in data_documentos | orderBy:myOrderBy | filter:documentos_filter" onclick="documentos_showCells(this);">
+                        <tr class="documentos-table w3-hover-blue-gray" ng-repeat="x in data_documentos | orderBy:myOrderBy | filter:documentos_filter" onclick="documentos_showCells(this); activeLink(event, 'documentos-table')">
                             <td>{{ x.ID }}</td>
                             <td>{{ x.Abrev }}</td>
                             <td>{{ x.Nombre }}</td>
@@ -464,7 +464,7 @@
                             <th ng-click="orderByMe('Nombre')">Nombre</th>
                             <th ng-click="orderByMe('Detalle')">Detalles</th>
                         </tr>
-                        <tr class="w3-hover-blue-gray" ng-repeat="x in data_grupos | orderBy:myOrderBy | filter:grupos_filter" onclick="grupos_showCells(this);">
+                        <tr class="grupos-table w3-hover-blue-gray" ng-repeat="x in data_grupos | orderBy:myOrderBy | filter:grupos_filter" onclick="grupos_showCells(this); activeLink(event, 'grupos-table')">
                             <td>{{ x.ID }}</td>
                             <td>{{ x.Nombre }}</td>
                             <td>{{ x.Detalle }}</td>
@@ -611,7 +611,7 @@
                             <th ng-click="orderByMe('Detalles')">Detalles</th>
 
                         </tr>
-                        <tr class="w3-hover-blue-gray" ng-repeat="x in data_productos | orderBy:myOrderBy | filter:productos_filter" onclick="productos_showCells(this)">
+                        <tr class="productos-tables w3-hover-blue-gray" ng-repeat="x in data_productos | orderBy:myOrderBy | filter:productos_filter" onclick="productos_showCells(this); activeLink(event, 'productos-table')">
                             <td>{{ x.ID }}</td>
                             <td>{{ x.Grupo }}</td>
                             <td>{{ x.Zona }}</td>
@@ -783,7 +783,7 @@
                             <th ng-click="orderByMe('Unidad')">Unidad Medida</th>
                             <th ng-click="orderByMe('Stock')">Stock</th>
                         </tr>
-                        <tr class="w3-hover-blue-gray" ng-repeat="x in data_productos | orderBy:myOrderBy | filter:regdocumentos_prod_filter" ng-click="showPrice($event,x.ID)">
+                        <tr class="prodList-table w3-hover-blue-gray" ng-repeat="x in data_productos | orderBy:myOrderBy | filter:regdocumentos_prod_filter" ng-click="showPrice($event,x.ID)" onclick="activeLink(event, 'prodList-table')">
                             <td>{{ x.ID }}</td>
                             <td>{{ x.Grupo }}</td>
                             <td>{{ x.Zona }}</td>
@@ -863,7 +863,7 @@
                             <th>(S)Total</th>
                             <th>Stock</th>
                         </tr>
-                        <tr class="w3-hover-blue-gray" ng-repeat="x in DataCollected | filter:regdocumentos_resumen_filter">
+                        <tr class="resumen-table w3-hover-blue-gray" ng-repeat="x in DataCollected | filter:regdocumentos_resumen_filter" onclick="activeLink(event, 'resumen-table')">
                             <td>{{ $index + 1 }}</td>
                             <td>{{ x.Fecha }}</td>
                             <td>{{ x.Doc }}</td>
@@ -1809,10 +1809,10 @@
 
           links = document.getElementsByClassName(c_name);
           for (i = 0; i < links.length; i++) {
-              links[i].className = links[i].className.replace(" w3-grey", "");
+              links[i].className = links[i].className.replace(" w3-black", "");
           }
 
-          evt.currentTarget.className += " w3-grey";
+          evt.currentTarget.className += " w3-black";
         }
 
 

@@ -38,7 +38,7 @@
                     $_SESSION['db'] = $row['db'];
 
 
-                    header("Location: http://localhost/meraki-rent/ms-invent/html/cardexZS.html");
+                    header("Location: http://localhost/meraki-rent/ms-invent/php/home.php");
 
                     break;
                 }else{

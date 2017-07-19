@@ -26,6 +26,7 @@
         $outp .= '"Fecha":"' . $row['fecha'] . '",';
         $outp .= '"Doc":"' . $row['doc'] . '",';
         $outp .= '"DocNum":"' . $row['docnum'] . '",';
+        $outp .= '"Guia":"' . $row['guia'] . '",';
         $outp .= '"Tercero":"' . $row['tercero'] . '",';
         $outp .= '"Detalle":"' . $row['detalle'] . '",';
         $outp .= '"IDProd":"' . $row['idprod'] . '",';

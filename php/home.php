@@ -868,7 +868,7 @@
                             <td>{{ x.Fecha }}</td>
                             <td>{{ x.Doc }}</td>
                             <td>{{ x.Docnum }}</td>
-                            <td>{{ x.Guianum }}</td>
+                            <td>{{ x.Guia }}</td>
                             <td>{{ x.Tercero }}</td>
                             <td>{{ x.Detalle }}</td>
                             <td>{{ x.IDProd }}</td>
@@ -940,7 +940,8 @@
                                 <th>ID</th>
                                 <th>Fecha</th>
                                 <th>Doc.</th>
-                                <th class="w3-border-right w3-border-gray">Doc.Num.</th>
+                                <th>N°Doc</th>
+                                <th class="w3-border-right w3-border-gray">N°Guía</th>
                                 <th>Tercero</th>
                                 <th>Detalle</th>
                                 <th>ID Prod.</th>
@@ -963,6 +964,7 @@
                                 <td>{{ x.Fecha }}</td>
                                 <td><input type="text" value="{{ x.Doc }}" ng-disabled="editEnable"></td>
                                 <td class="w3-border-right w3-border-gray"><input type="text" value="{{ x.DocNum }}" style="width:100%;" ng-disabled="editEnable"></td>
+                                <td class="w3-border-right w3-border-gray"><input type="text" value="{{ x.Guia }}" style="width:100%;" ng-disabled="editEnable"></td>
                                 <td><input type="text" value="{{ x.Tercero }}" ng-disabled="editEnable"></td>
                                 <td><input type="text" value="{{ x.Detalle }}" ng-disabled="editEnable"></td>
                                 <td><input type="text" value="{{ x.IDProd }}" style="width:100%;" ng-disabled="editEnable"></td>
@@ -1111,7 +1113,8 @@
                                 <th>Item</th>
                                 <th>Fecha</th>
                                 <th>Doc.</th>
-                                <th class="w3-border-right w3-border-gray">Doc.Num.</th>
+                                <th>N°Doc</th>
+                                <th class="w3-border-right w3-border-gray">N°Guía</th>
                                 <th>Tercero</th>
                                 <th>Detalle</th>
                                 <th>ID Prod.</th>
@@ -1133,7 +1136,8 @@
                                 <td>{{ x.ID }}</td>
                                 <td>{{ x.Fecha }}</td>
                                 <td>{{ x.Doc }}</td>
-                                <td class="w3-border-right w3-border-gray">{{ x.DocNum }}</td>
+                                <td>{{ x.DocNum }}</td>
+                                <td class="w3-border-right w3-border-gray">{{ x.Guia }}</td>
                                 <td>{{ x.Tercero }}</td>
                                 <td>{{ x.Detalle }}</td>
                                 <td>{{ x.IDProd }}</td>
@@ -1501,7 +1505,7 @@
 
                         }
                         //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
-                        var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":$scope.cantidad,"SPUnitario":$scope.price,"STotal":$scope.price*$scope.cantidad,"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":$scope.cantidad,"SPUnitario":$scope.price,"STotal":$scope.price*$scope.cantidad,"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }else if ($scope.docNat === 'entrada') {
                         if ($scope.temp_stock[$scope.workProdIndex - 1].stock === 0) {
                             $scope.temp_stock[$scope.workProdIndex - 1].stock = Number($scope.stock || 0) + $scope.cantidad;
@@ -1509,9 +1513,9 @@
                             $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock + $scope.cantidad;
                         }
                         //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
-                        var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":$scope.cantidad,"EPUnitario":$scope.price,"ETotal":$scope.price*$scope.cantidad,"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":$scope.cantidad,"EPUnitario":$scope.price,"ETotal":$scope.price*$scope.cantidad,"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }else if ($scope.docNat === 'ajuste') {
-                        var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }
 
                     $scope.DataCollected.push(tempDataCollected);

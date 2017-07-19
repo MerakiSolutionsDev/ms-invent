@@ -2,7 +2,7 @@
     SESSION_START();
     header("Access-Control-Allow-Origin: *");
     if(!isset($_SESSION['db'])){
-        header("Location: http://localhost/meraki-rent/ms-invent/html/login.html");
+        header("Location: http://www.merakisolutionsdev.com/rent/ms-invent/html/login.html");
         exit();
     }
 
@@ -38,6 +38,7 @@
             $_fecha      = mysqli_real_escape_string($connect, $data[$i]->Fecha);
             $_doc        = mysqli_real_escape_string($connect, $data[$i]->Doc);
             $_docnum     = mysqli_real_escape_string($connect, $data[$i]->Docnum);
+            $_guia     = mysqli_real_escape_string($connect, $data[$i]->Guia);
             $_tercero    = mysqli_real_escape_string($connect, $data[$i]->Tercero);
             $_idprod     = mysqli_real_escape_string($connect, $data[$i]->IDProd);
             $_prod       = mysqli_real_escape_string($connect, $data[$i]->Prod);
@@ -51,7 +52,7 @@
             $_etotal     = mysqli_real_escape_string($connect, $data[$i]->ETotal);
             $_stock     = mysqli_real_escape_string($connect, $data[$i]->Stock);
 
-            $query2 = "INSERT INTO `regdocumentos` (id_transaction,id_resumen,fecha,doc,docnum,tercero,detalle,idprod,prod,moneda,scantidad,spunitario,stotal,ecantidad,epunitario,etotal,stock) VALUES ('$id_transaction','$id_resumen','$_fecha','$_doc','$_docnum','$_tercero','$_detalle','$_idprod','$_prod','$_moneda','$_scantidad','$_spunitario','$_stotal','$_ecantidad','$_epunitario','$_etotal','$_stock')";
+            $query2 = "INSERT INTO `regdocumentos` (id_transaction,id_resumen,fecha,doc,docnum, guia,tercero,detalle,idprod,prod,moneda,scantidad,spunitario,stotal,ecantidad,epunitario,etotal,stock) VALUES ('$id_transaction','$id_resumen','$_fecha','$_doc','$_docnum','$_guia','$_tercero','$_detalle','$_idprod','$_prod','$_moneda','$_scantidad','$_spunitario','$_stotal','$_ecantidad','$_epunitario','$_etotal','$_stock')";
 
             if(mysqli_query($connect,$query2)){
                 $counter = $counter + 1;

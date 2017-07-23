@@ -119,7 +119,7 @@
                 </div>
             </div>
 
-            <!--************ GESTION DE ZONAS o SUCURSALES ***************-->
+            <!--************ GESTION DE Almacenes ***************-->
             <div id="zonas-sucursales" class="cardexBlock w3-container w3-padding w3-animate-top" ng-controller="ZSCtrl" style="display: none; margin-top: 75px;">
                 <div class="w3-container w3-ana-509 w3-card-4 w3-round-medium">
                     <h4 class="meraki-font-s6">Zonas o Sucursales</h4>

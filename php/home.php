@@ -134,17 +134,23 @@
                             <h4>ID Zona o Sucursal</h4>
                             <input id="ZSInputID" class="w3-input w3-border w3-round-medium" type="text" name="ID_ZonaSucursal" placeholder="ID" disabled>
                             <input id="ZSInputID_form" class="w3-input w3-border w3-round-medium" type="text" name="ID_ZonaSucursal_form" style="display:none;">
-                            <h4>Nombre</h4>
-                            <input ng-model="nuevaZS.Nombre" id="ZSInputNombre" class="w3-input w3-border w3-round-medium" type="text" name="nombre_ZonaSucursal" placeholder="Nombre de la Zona o Sucursal" required>
+                            <h4>Almacen</h4>
+                            <input ng-model="nuevaZS.Nombre" id="ZSInputNombre" class="w3-input w3-border w3-round-medium" type="text" name="nombre_ZonaSucursal" placeholder="Nombre de almacen" required>
 
                             <h4>Dirección</h4>
-                            <input ng-model="nuevaZS.Direccion" id="ZSInputDireccion" class="w3-input w3-border w3-round-medium" type="text" name="direccion_ZonaSucursal" placeholder="Dirección de la Zona o Sucursal" required>
+                            <input ng-model="nuevaZS.Direccion" id="ZSInputDireccion" class="w3-input w3-border w3-round-medium" type="text" name="direccion_ZonaSucursal" placeholder="Dirección de almacen" required>
+
+                            <h4>Supervisor</h4>
+                            <input ng-model="nuevaZS.Supervisor" id="ZSInputSupervisor" class="w3-input w3-border w3-round-medium" type="text" name="supervisor_ZonaSucursal" placeholder="Supervisor de Almacen">
+
+                            <h4>Mail</h4>
+                            <input ng-model="nuevaZS.Mail" id="ZSInputMail" class="w3-input w3-border w3-round-medium" type="text" name="mail_ZonaSucursal" placeholder="Correo Electrónico">
 
                             <h4>Teléfono</h4>
                             <input ng-model="nuevaZS.Telefono" id="ZSInputTelefono" class="w3-input w3-border w3-round-medium" type="text" name="tel_ZonaSucursal" placeholder="Teléfono">
 
-                            <h4>Detalles</h4>
-                            <input ng-model="nuevaZS.Detalle" id="ZSInputDetalles" class="w3-input w3-border w3-round-medium" type="text" name="detalles_ZonaSucursal" placeholder="Información adicional">
+                            <!--h4>Detalles</h4>
+                            <input ng-model="nuevaZS.Detalle" id="ZSInputDetalles" class="w3-input w3-border w3-round-medium" type="text" name="detalles_ZonaSucursal" placeholder="Información adicional"-->
 
                             <hr class="w3-border w3-border-red">
 
@@ -175,15 +181,17 @@
                             <th ng-click="orderByMe('ID')">ID</th>
                             <th ng-click="orderByMe('Nombre')">Nombre</th>
                             <th ng-click="orderByMe('Direccion')">Dirección</th>
+                            <th ng-click="orderByMe('Supervisor')">Supervisor</th>
+                            <th ng-click="orderByMe('Mail')">Mail</th>
                             <th ng-click="orderByMe('Telefono')">Teléfono</th>
-                            <th ng-click="orderByMe('Detalle')">Detalles</th>
                         </tr>
                         <tr class="zs-table w3-hover-blue-gray" ng-repeat="x in data_zonasSucursales | orderBy:myOrderBy | filter:zs_filter" onclick="ZS_showCells(this); activeLink(event, 'zs-table')">
                             <td>{{ x.ID }}</td>
                             <td>{{ x.Nombre }}</td>
                             <td>{{ x.Direccion }}</td>
+                            <td>{{ x.Supervisor }}</td>
+                            <td>{{ x.Mail }}</td>
                             <td>{{ x.Telefono }}</td>
-                            <td>{{ x.Detalle }}</td>
                         </tr>
                     </table>
                 </div>
@@ -986,7 +994,7 @@
                 </div>
             </div>
 
-            <!--************ CARDEX ***************-->
+            <!--************ KARDEX ***************-->
             <div id="consultas" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="consultas-Ctrl" style="display: none; margin-top: 75px;">
                 <div class="w3-container w3-ana-509 w3-card-4">
                     <h4 class="meraki-font-s6">Cardex</h4>
@@ -1227,7 +1235,7 @@
             }
 
             $scope.exportData_zonasSucursales = function (){
-                alasql('SELECT * INTO XLSX("Zonas_Sucursales.xlsx",{headers:true}) FROM ?',[$scope.data_zonasSucursales]);
+                alasql('SELECT * INTO XLSX("Almacenes.xlsx",{headers:true}) FROM ?',[$scope.data_zonasSucursales]);
             }
 
             $scope.orderByMe = function(x) {
@@ -1758,8 +1766,10 @@
             document.getElementById("ZSInputID_form").value = owner.cells[0].innerHTML;
             document.getElementById("ZSInputNombre").value = owner.cells[1].innerHTML;
             document.getElementById("ZSInputDireccion").value = owner.cells[2].innerHTML;
-            document.getElementById("ZSInputTelefono").value = owner.cells[3].innerHTML;
-            document.getElementById("ZSInputDetalles").value = owner.cells[4].innerHTML;
+            document.getElementById("ZSInputSupervisor").value = owner.cells[3].innerHTML;
+            document.getElementById("ZSInputMail").value = owner.cells[4].innerHTML;
+            document.getElementById("ZSInputTelefono").value = owner.cells[5].innerHTML;
+
         }
 
         function grupos_showCells(owner) {

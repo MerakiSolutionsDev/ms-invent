@@ -23,8 +23,9 @@
         if ($outp != "") {$outp .= ",";}
         $outp .= '{"ID":"' . $row['id'] . '",';
         $outp .= '"Nombre":"' . $row['nombre'] . '",';
-        $outp .= '"Detalle":"' . $row['detalles'] . '",';
         $outp .= '"Direccion":"' . $row['dir'] . '",';
+        $outp .= '"Supervisor":"' . $row['supervisor'] . '",';
+        $outp .= '"Mail":"' . $row['mail'] . '",';
         $outp .= '"Telefono":"' . $row['tel'] . '"}';
     }
 

@@ -1,4 +1,4 @@
-MS-INVENT
+Inventarios Trammo
 
 Es una aplicación web para llevar el control de inventarios y kardex de productos.
 

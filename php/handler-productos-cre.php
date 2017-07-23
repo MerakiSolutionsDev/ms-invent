@@ -18,7 +18,7 @@
     }
 
     if(isset($_POST['Crear-productos'])){
-        $sql = "INSERT INTO productos (grupo, zona, nombre, unidad, stock, stocke, offset_stocka, stocka, moneda, compra, venta, detalles) VALUES ('".$_POST['grupo_productos']."','".$_POST['zona_productos']."','".$_POST['nombre_productos']."','".$_POST['unidad_productos']."','".$_POST['stock_productos']."','".$_POST['stocke_productos']."','".$_POST['offset_productos']."','".$_POST['stocka_productos']."','".$_POST['moneda_productos']."','".$_POST['compra_productos']."','".$_POST['venta_productos']."','".$_POST['detalles_productos']."')";
+        $sql = "INSERT INTO productos (grupo, igv, nombre, unidad, peso, factor, stock, stocke, offset_stocka, stocka, moneda, compra) VALUES ('".$_POST['grupo_productos']."','".$_POST['zona_productos']."','".$_POST['nombre_productos']."','".$_POST['unidad_productos']."','".$_POST['peso_productos']."','".$_POST['factor_productos']."','".$_POST['stock_productos']."','".$_POST['stocke_productos']."','".$_POST['offset_productos']."','".$_POST['stocka_productos']."','".$_POST['moneda_productos']."','".$_POST['compra_productos']."')";
 
         if (mysqli_query($conn, $sql)){
             print_r ("Producto creado satisfactoriamente!");

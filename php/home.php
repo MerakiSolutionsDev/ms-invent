@@ -525,20 +525,24 @@
                             <p></p>
                             <div class="w3-row">
                                 <div class="w3-col m2 l2">
-                                    <h4>Zona</h4>
+                                    <h4>IGV</h4>
                                 </div>
                                 <div class="w3-col m6 l6">
-                                    <select id="productos-InputZona" class="w3-select w3-round-medium" name="zona_productos" title="Zona de Producto" ng-model="productos_zs" ng-init="productos_zs = ''" ng-mousedown = "updateZSTable()">
+                                    <select id="productos-InputIGV" class="w3-select w3-round-medium" name="zona_productos" title="Producto Afecto o Inafecto" ng-model="productos_igv">
                                         <option value="" disabled selected>Seleccione</option>
-                                        <option ng-repeat = "zs in data_zonasSucursales" value="{{zs.Nombre}}">{{zs.Nombre}}</option>
+                                        <option value = "AFECTO" >AFECTO</option>
+                                        <option value = "INAFECTO" >INAFECTO</option>
                                     </select>
                                 </div>
                                 <div class="w3-col m1 l1">
                                     <p></p>
                                 </div>
-                                <div class="w3-col m3 l3" ng-repeat="zs in data_zonasSucursales | filter:productos_zs">
-                                    <input id="productos-InputIDZS" class="w3-input w3-border w3-round-medium" type="text" name="idzs_productos" placeholder="ID = {{zs.ID}}" ng-if="productos_zs !== ''" disabled>
+                                <div class="w3-col m3 l3">
+                                    <p></p>
                                 </div>
+                                <!--div class="w3-col m3 l3" ng-repeat="zs in data_zonasSucursales | filter:productos_zs">
+                                    <input id="productos-InputIDZS" class="w3-input w3-border w3-round-medium" type="text" name="idzs_productos" placeholder="ID = {{zs.ID}}" ng-if="productos_zs !== ''" disabled>
+                                </div-->
                             </div>
                             <hr>
 
@@ -546,8 +550,25 @@
                             <h4>Producto</h4>
                             <input id="productos-InputNombre" class="w3-input w3-border w3-round-medium" type="text" name="nombre_productos" placeholder="Nombre del Producto" required>
 
-                            <h4>Unidad de medida</h4>
-                            <input id="productos-InputUnidad" class="w3-input w3-border w3-round-medium" type="text" name="unidad_productos" placeholder="Unidad de medida">
+                            <h4>Propiedades del material</h4>
+                            <div class="w3-row">
+                                <div class="w3-col s12 m4 l4">
+                                    <input id="productos-InputUnidad" class="w3-input w3-border w3-round-medium" type="text" name="unidad_productos" placeholder="Unidad de medida">
+                                </div>
+                                <div class="w3-col s0 m1 l1">
+                                    <p></p>
+                                </div>
+                                <div class="w3-col s12 m3 l3">
+                                    <input id="productos-InputPeso" class="w3-input w3-border w3-round-medium" type="text" name="peso_productos" placeholder="Peso">
+                                </div>
+                                <div class="w3-col s0 m1 l1">
+                                    <p></p>
+                                </div>
+                                <div class="w3-col s12 m3 l3">
+                                    <input id="productos-InputFactor" class="w3-input w3-border w3-round-medium" type="text" name="factor_productos" placeholder="Factor=1TM/Peso">
+                                </div>
+                            </div>
+                            <hr>
 
                             <div class="w3-row-padding w3-margin-top">
                                 <div class="w3-col m3 l3">
@@ -571,20 +592,20 @@
                             </div>
                             <hr>
 
-                            <h4>Detalles</h4>
-                            <input id="productos-InputDetalles" class="w3-input w3-border w3-round-medium" type="text" name="detalles_productos" placeholder="Información adicional">
+                            <!--h4>Detalles</h4>
+                            <input id="productos-InputDetalles" class="w3-input w3-border w3-round-medium" type="text" name="detalles_productos" placeholder="Información adicional"-->
+
                             <h4>Tipo de Moneda</h4>
                             <select id="productos-InputMoneda" class="w3-select w3-round-medium" name="moneda_productos">
                                 <option value="" selected disabled>Seleccionar</option>
                                 <option value="PEN" >PEN</option>
                                 <option value="USD" >USD</option>
                                 <option value="EUR" >EUR</option>
-                                <option value="JPN" >JPN</option>
                             </select>
-                            <h4>Precio de Compra / <span>Costo de Fabricación</span></h4>
+                            <h4>Precio de Compra / <span> Costo</span></h4>
                             <input id="productos-InputCompra" class="meraki-font-s5 w3-input w3-border w3-round-medium" type="text" name="compra_productos">
-                            <h4>Precio de Venta</h4>
-                            <input id="productos-InputVenta" class="meraki-font-s5 w3-input w3-border w3-round-medium" type="text" name="venta_productos">
+                            <!--h4>Precio de Venta</h4>
+                            <input id="productos-InputVenta" class="meraki-font-s5 w3-input w3-border w3-round-medium" type="text" name="venta_productos"-->
 
                             <hr class="w3-border w3-border-red">
                             <div class="w3-row-padding w3-center w3-margin-top">
@@ -611,33 +632,33 @@
                         <tr>
                             <th ng-click="orderByMe('ID')">ID</th>
                             <th ng-click="orderByMe('Grupo')">Grupo</th>
-                            <th ng-click="orderByMe('Zona')">Zona</th>
+                            <th ng-click="orderByMe('IGV')">IGV</th>
                             <th ng-click="orderByMe('Nombre')">Nombre</th>
                             <th ng-click="orderByMe('Unidad')">Unidad Medida</th>
+                            <th ng-click="orderByMe('Peso')">Peso</th>
+                            <th ng-click="orderByMe('Factor')">Factor</th>
                             <th ng-click="orderByMe('Stock')">Stock</th>
                             <th ng-click="orderByMe('StockE')">Stock E.</th>
                             <th ng-click="orderByMe('Offset')">Offset</th>
                             <th ng-click="orderByMe('StockA')">Stock A.</th>
                             <th ng-click="orderByMe('Moneda')">Moneda</th>
                             <th ng-click="orderByMe('Compra')">P. Compra</th>
-                            <th ng-click="orderByMe('Venta')">P. Venta</th>
-                            <th ng-click="orderByMe('Detalles')">Detalles</th>
 
                         </tr>
-                        <tr class="productos-tables w3-hover-blue-gray" ng-repeat="x in data_productos | orderBy:myOrderBy | filter:productos_filter" onclick="productos_showCells(this); activeLink(event, 'productos-table')">
+                        <tr class="productos-table w3-hover-blue-gray" ng-repeat="x in data_productos | orderBy:myOrderBy | filter:productos_filter" onclick="productos_showCells(this); activeLink(event, 'productos-table')">
                             <td>{{ x.ID }}</td>
                             <td>{{ x.Grupo }}</td>
-                            <td>{{ x.Zona }}</td>
+                            <td>{{ x.IGV }}</td>
                             <td>{{ x.Nombre }}</td>
                             <td>{{ x.Unidad }}</td>
+                            <td>{{ x.Peso }}</td>
+                            <td>{{ x.Factor }}</td>
                             <td>{{ x.Stock }}</td>
                             <td>{{ x.StockE }}</td>
                             <td>{{ x.Offset }}</td>
                             <td>{{ x.StockA }}</td>
                             <td>{{ x.Moneda }}</td>
                             <td>{{ x.Compra }}</td>
-                            <td>{{ x.Venta }}</td>
-                            <td>{{ x.Detalles }}</td>
                         </tr>
                     </table>
                 </div>
@@ -1811,16 +1832,16 @@
             document.getElementById("productos-InputID").value = owner.cells[0].innerHTML;
             document.getElementById("productos-InputID_form").value = owner.cells[0].innerHTML;
             document.getElementById("productos-InputGrupo").value = owner.cells[1].innerHTML;
-            document.getElementById("productos-InputZona").value = owner.cells[2].innerHTML;
+            document.getElementById("productos-InputIGV").value = owner.cells[2].innerHTML;
             document.getElementById("productos-InputNombre").value = owner.cells[3].innerHTML;
             document.getElementById("productos-InputUnidad").value = owner.cells[4].innerHTML;
-            document.getElementById("productos-InputStock").value = owner.cells[5].innerHTML;
-            document.getElementById("productos-InputStockE").value = owner.cells[6].innerHTML;
-            document.getElementById("productos-InputOffset").value = owner.cells[7].innerHTML;
-            document.getElementById("productos-InputMoneda").value = owner.cells[9].innerHTML;
-            document.getElementById("productos-InputCompra").value = owner.cells[10].innerHTML;
-            document.getElementById("productos-InputVenta").value = owner.cells[11].innerHTML;
-            document.getElementById("productos-InputDetalles").value = owner.cells[12].innerHTML;
+            document.getElementById("productos-InputPeso").value = owner.cells[5].innerHTML;
+            document.getElementById("productos-InputFactor").value = owner.cells[6].innerHTML;
+            document.getElementById("productos-InputStock").value = owner.cells[7].innerHTML;
+            document.getElementById("productos-InputStockE").value = owner.cells[8].innerHTML;
+            document.getElementById("productos-InputOffset").value = owner.cells[9].innerHTML;
+            document.getElementById("productos-InputMoneda").value = owner.cells[11].innerHTML;
+            document.getElementById("productos-InputCompra").value = owner.cells[12].innerHTML;
         }
 
         function activeLink(evt, c_name) {

@@ -23,17 +23,17 @@
         if ($outp != "") {$outp .= ",";}
         $outp .= '{"ID":"' . $row['id'] . '",';
         $outp .= '"Grupo":"' . $row['grupo'] . '",';
-        $outp .= '"Zona":"' . $row['zona'] . '",';
+        $outp .= '"IGV":"' . $row['igv'] . '",';
         $outp .= '"Nombre":"' . $row['nombre'] . '",';
         $outp .= '"Unidad":"' . $row['unidad'] . '",';
+        $outp .= '"Peso":"' . $row['peso'] . '",';
+        $outp .= '"Factor":"' . $row['factor'] . '",';
         $outp .= '"Stock":"' . $row['stock'] . '",';
         $outp .= '"StockE":"' . $row['stocke'] . '",';
         $outp .= '"Offset":"' . $row['offset_stocka'] . '",';
         $outp .= '"StockA":"' . $row['stocka'] . '",';
         $outp .= '"Moneda":"' . $row['moneda'] . '",';
-        $outp .= '"Compra":"' . $row['compra'] . '",';
-        $outp .= '"Venta":"' . $row['venta'] . '",';
-        $outp .= '"Detalles":"' . $row['detalles'] . '"}';
+        $outp .= '"Compra":"' . $row['compra'] . '"}';
     }
 
     $outp ='{"records":['.$outp.']}';

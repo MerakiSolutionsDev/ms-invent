@@ -18,7 +18,7 @@
     }
 
     if(isset($_POST['Crear-terceros'])){
-        $sql = "INSERT INTO terceros (identi, identiClass, terceroClass,  nombre, ciudad, direccion, tel, detalles) VALUES ('".$_POST['identi_terceros']."','".$_POST['identiclass_terceros']."','".$_POST['terceroclass_terceros']."','".$_POST['nombre_terceros']."','".$_POST['ciudad_terceros']."','".$_POST['direccion_terceros']."','".$_POST['tel_terceros']."','".$_POST['detalles_terceros']."')";
+        $sql = "INSERT INTO terceros (identi, identiClass, terceroClass,  nombre, direccion, contacto, mail, tel) VALUES ('".$_POST['identi_terceros']."','".$_POST['identiclass_terceros']."','".$_POST['terceroclass_terceros']."','".$_POST['nombre_terceros']."','".$_POST['ciudad_terceros']."','".$_POST['direccion_terceros']."','".$_POST['contacto_terceros']."','".$_POST['mail_terceros']."','".$_POST['tel_terceros']."')";
 
         if (mysqli_query($conn, $sql)){
             print_r ("Tercero creado satisfactoriamente!");

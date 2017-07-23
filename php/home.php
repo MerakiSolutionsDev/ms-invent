@@ -246,14 +246,19 @@
 
                             <h4>Nombre</h4>
                             <input id="terceros-InputNombre" class="w3-input w3-border w3-round-medium" type="text" name="nombre_terceros" placeholder="Nombre del tercero" required>
-                            <h4>Ciudad</h4>
-                            <input id="terceros-InputCiudad" class="w3-input w3-border w3-round-medium" type="text" name="ciudad_terceros" placeholder="Lima, Arequipa, Mollendo">
+
                             <h4>Dirección</h4>
                             <input id="terceros-InputDireccion" class="w3-input w3-border w3-round-medium" type="text" name="direccion_terceros" placeholder="Calle, Av., Jr.">
-                            <h4>Teléfonos</h4>
+                            <hr>
+
+                            <h4>Contacto</h4>
+                            <input id="terceros-InputContacto" class="w3-input w3-border w3-round-medium" type="text" name="contacto_terceros" placeholder="Nombre del contacto">
+
+                            <h4>Mail</h4>
+                            <input id="terceros-InputMail" class="w3-input w3-border w3-round-medium" type="text" name="mail_terceros" placeholder="Correo Electrónico">
+
+                            <h4>Teléfono</h4>
                             <input id="terceros-InputTel" class="w3-input w3-border w3-round-medium" type="text" name="tel_terceros" placeholder="Fijo o Celular">
-                            <h4>Detalles</h4>
-                            <input id="terceros-InputDetalles" class="w3-input w3-border w3-round-medium" type="text" name="detalles_terceros" placeholder="Información adicional">
 
                             <hr class="w3-border w3-border-red">
                             <div class="w3-row w3-center w3-margin-top">
@@ -282,25 +287,25 @@
                     <table class="w3-table-all w3-responsive w3-card-4 w3-text-dark-grey">
                         <tr>
                             <th ng-click="orderByMe('ID')">ID</th>
-                            <th ng-click="orderByMe('Identi')">N°</th>
-                            <th ng-click="orderByMe('IdentiClass')">Doc. Identi.</th>
                             <th ng-click="orderByMe('TerceroClass')">Tipo</th>
+                            <th ng-click="orderByMe('IdentiClass')">Doc. Identi.</th>
+                            <th ng-click="orderByMe('Identi')">N°</th>
                             <th ng-click="orderByMe('Nombre')">Nombre</th>
-                            <th ng-click="orderByMe('Ciudad')">Ciudad</th>
                             <th ng-click="orderByMe('Direccion')">Dirección</th>
+                            <th ng-click="orderByMe('Contacto')">Contacto</th>
+                            <th ng-click="orderByMe('Mail')">Mail</th>
                             <th ng-click="orderByMe('Tel')">Teléfono</th>
-                            <th ng-click="orderByMe('Detalles')">Detalles</th>
                         </tr>
                         <tr class="terceros-table w3-hover-blue-gray" ng-repeat="x in data_terceros | orderBy:myOrderBy | filter:terceros_filter" onclick="terceros_showCells(this); activeLink(event, 'terceros-table')">
                             <td>{{ x.ID }}</td>
-                            <td>{{ x.Identi }}</td>
-                            <td>{{ x.IdentiClass }}</td>
                             <td>{{ x.TerceroClass }}</td>
+                            <td>{{ x.IdentiClass }}</td>
+                            <td>{{ x.Identi }}</td>
                             <td>{{ x.Nombre }}</td>
-                            <td>{{ x.Ciudad }}</td>
                             <td>{{ x.Direccion }}</td>
-                            <td>{{ x.Tel }}</td>
-                            <td>{{ x.Detalles }}</td>
+                            <td>{{ x.Contacto }}</td>
+                            <td>{{ x.Mail }}</td>
+                            <td>{{ x.Telefono }}</td>
                         </tr>
                     </table>
                 </div>
@@ -1792,14 +1797,14 @@
 
         function terceros_showCells(owner) {
             document.getElementById("terceros-InputID_form").value = owner.cells[0].innerHTML;
-            document.getElementById("terceros-InputIdenti").value = owner.cells[1].innerHTML;
+            document.getElementById("terceros-InputTerceroClass").value = owner.cells[1].innerHTML;
             document.getElementById("terceros-InputIdentiClass").value = owner.cells[2].innerHTML;
-            document.getElementById("terceros-InputTerceroClass").value = owner.cells[3].innerHTML;
+            document.getElementById("terceros-InputIdenti").value = owner.cells[3].innerHTML;
             document.getElementById("terceros-InputNombre").value = owner.cells[4].innerHTML;
-            document.getElementById("terceros-InputCiudad").value = owner.cells[5].innerHTML;
-            document.getElementById("terceros-InputDireccion").value = owner.cells[6].innerHTML;
-            document.getElementById("terceros-InputTel").value = owner.cells[7].innerHTML
-            document.getElementById("terceros-InputDetalles").value = owner.cells[8].innerHTML;
+            document.getElementById("terceros-InputDireccion").value = owner.cells[5].innerHTML;
+            document.getElementById("terceros-InputContacto").value = owner.cells[6].innerHTML;
+            document.getElementById("terceros-InputMail").value = owner.cells[7].innerHTML;
+            document.getElementById("terceros-InputTel").value = owner.cells[8].innerHTML
         }
 
         function productos_showCells(owner) {

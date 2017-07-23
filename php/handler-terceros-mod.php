@@ -19,7 +19,7 @@
 
     if (isset($_POST['Modificar-terceros'])) {
 
-        $sql = "UPDATE terceros SET identi = '".$_POST['identi_terceros']."', identiClass = '".$_POST['identiclass_terceros']."', terceroClass = '".$_POST['terceroclass_terceros']."', nombre = '".$_POST['nombre_terceros']."', ciudad = '".$_POST['ciudad_terceros']."', direccion = '".$_POST['direccion_terceros']."', tel = '".$_POST['tel_terceros']."', detalles = '".$_POST['detalles_terceros']."' WHERE id = '".$_POST['ID_terceros_form']."'";
+        $sql = "UPDATE terceros SET identi = '".$_POST['identi_terceros']."', identiClass = '".$_POST['identiclass_terceros']."', terceroClass = '".$_POST['terceroclass_terceros']."', nombre = '".$_POST['nombre_terceros']."', direccion = '".$_POST['direccion_terceros']."',  contacto = '".$_POST['contacto_terceros']."',  mail = '".$_POST['mail_terceros']."', tel = '".$_POST['tel_terceros']."' WHERE id = '".$_POST['ID_terceros_form']."'";
 
         if (mysqli_query($conn, $sql)){
             consolo.log("Tercero Actualizado!");

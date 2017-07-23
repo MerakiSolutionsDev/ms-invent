@@ -28,8 +28,9 @@
         $outp .= '"Nombre":"' . $row['nombre'] . '",';
         $outp .= '"Ciudad":"' . $row['ciudad'] . '",';
         $outp .= '"Direccion":"' . $row['direccion'] . '",';
-        $outp .= '"Tel":"' . $row['tel'] . '",';
-        $outp .= '"Detalles":"' . $row['detalles'] . '"}';
+        $outp .= '"Contacto":"' . $row['contacto'] . '",';
+        $outp .= '"Mail":"' . $row['mail'] . '",';
+        $outp .= '"Telefono":"' . $row['tel'] . '"}';
     }
 
     $outp ='{"records":['.$outp.']}';

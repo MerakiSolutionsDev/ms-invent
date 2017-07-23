@@ -38,7 +38,7 @@
                     $_SESSION['db'] = $row['db'];
 
 
-                    header("Location: http://localhost/meraki-rent/ms-invent/php/home.php");
+                    header("Location: http://localhost/Trammo/app/php/home.php");
 
                     break;
                 }else{
@@ -46,7 +46,7 @@
 
                   echo $loginMsg;
 
-                  header("Location: http://localhost/meraki-rent/ms-invent/html/login.html");
+                  header("Location: http://localhost/Trammo/app/html/login.html");
                 }
               }
         } else {

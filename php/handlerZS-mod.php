@@ -18,7 +18,7 @@
     }
 
     if (isset($_POST['ModificarZS'])) {
-        $sql = "UPDATE zonas_sucursales SET nombre = '".$_POST['nombre_ZonaSucursal']."', dir = '".$_POST['direccion_ZonaSucursal']."', supervisor = '".$_POST['supervisor_ZonaSucursal']."', mail = '".$_POST['mail_ZonaSucursal']."' ,tel = '".$_POST['tel_ZonaSucursal']."' WHERE id = '".$_POST['ID_ZonaSucursal_form']."'";
+        $sql = "UPDATE zonas_sucursales SET abrev = '".$_POST['abrev_ZonaSucursal']."', nombre = '".$_POST['nombre_ZonaSucursal']."', dir = '".$_POST['direccion_ZonaSucursal']."', supervisor = '".$_POST['supervisor_ZonaSucursal']."', mail = '".$_POST['mail_ZonaSucursal']."' ,tel = '".$_POST['tel_ZonaSucursal']."' WHERE id = '".$_POST['ID_ZonaSucursal_form']."'";
 
         if (mysqli_query($conn, $sql)){
             print_r("Zona o Sucursal Actualizada!");

@@ -22,6 +22,7 @@
     while ($row = mysqli_fetch_assoc($result)) {
         if ($outp != "") {$outp .= ",";}
         $outp .= '{"ID":"' . $row['id'] . '",';
+        $outp .= '"Abrev":"' . $row['abrev'] . '",';
         $outp .= '"Nombre":"' . $row['nombre'] . '",';
         $outp .= '"Direccion":"' . $row['dir'] . '",';
         $outp .= '"Supervisor":"' . $row['supervisor'] . '",';

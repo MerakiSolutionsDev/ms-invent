@@ -135,10 +135,22 @@
                             <input id="ZSInputID" class="w3-input w3-border w3-round-medium" type="text" name="ID_ZonaSucursal" placeholder="ID" disabled>
                             <input id="ZSInputID_form" class="w3-input w3-border w3-round-medium" type="text" name="ID_ZonaSucursal_form" style="display:none;">
                             <h4>Almacen</h4>
-                            <input ng-model="nuevaZS.Nombre" id="ZSInputNombre" class="w3-input w3-border w3-round-medium" type="text" name="nombre_ZonaSucursal" placeholder="Nombre de almacen" required>
+                            <div class="w3-row">
+                                <div class="w3-col m3 l3">
+                                    <input id="ZSInputAbrev" class="w3-input w3-border w3-round-medium" type="text" name="abrev_ZonaSucursal" placeholder="Abrev." required>
+                                </div>
+                                <div class="w3-col m1 l1">
+                                    <p></p>
+                                </div>
+                                <div class="w3-col m8 l8">
+                                    <input ng-model="nuevaZS.Nombre" id="ZSInputNombre" class="w3-input w3-border w3-round-medium" type="text" name="nombre_ZonaSucursal" placeholder="Nombre de almacen" required>
+                                </div>
+
+                            </div>
 
                             <h4>Dirección</h4>
                             <input ng-model="nuevaZS.Direccion" id="ZSInputDireccion" class="w3-input w3-border w3-round-medium" type="text" name="direccion_ZonaSucursal" placeholder="Dirección de almacen" required>
+                            <hr>
 
                             <h4>Supervisor</h4>
                             <input ng-model="nuevaZS.Supervisor" id="ZSInputSupervisor" class="w3-input w3-border w3-round-medium" type="text" name="supervisor_ZonaSucursal" placeholder="Supervisor de Almacen">
@@ -179,6 +191,7 @@
                     <table class="w3-table-all w3-text-dark-grey w3-card-4">
                         <tr>
                             <th ng-click="orderByMe('ID')">ID</th>
+                            <th ng-click="orderByMe('Abrev')">Abrev.</th>
                             <th ng-click="orderByMe('Nombre')">Nombre</th>
                             <th ng-click="orderByMe('Direccion')">Dirección</th>
                             <th ng-click="orderByMe('Supervisor')">Supervisor</th>
@@ -187,6 +200,7 @@
                         </tr>
                         <tr class="zs-table w3-hover-blue-gray" ng-repeat="x in data_zonasSucursales | orderBy:myOrderBy | filter:zs_filter" onclick="ZS_showCells(this); activeLink(event, 'zs-table')">
                             <td>{{ x.ID }}</td>
+                            <td>{{ x.Abrev }}</td>
                             <td>{{ x.Nombre }}</td>
                             <td>{{ x.Direccion }}</td>
                             <td>{{ x.Supervisor }}</td>
@@ -691,14 +705,12 @@
                                 </div>
                                 <div class="w3-col m6 l6">
                                     <h4>Fecha</h4>
-                                    <input id="regdocumentos-InputFecha" class="w3-input w3-border w3-round-medium" type="date" name="fecha_regdocumentos" ng-model="fecha" placeholder="Nombres" required>
+                                    <input id="regdocumentos-InputFecha" class="w3-input w3-border w3-round-medium" type="text" name="fecha_regdocumentos" ng-model="fecha" disabled>
                                 </div>
                             </div>
-                            <hr>
 
-
-                            <h4>Detalle</h4>
-                            <input id="regdocumentos-InputDetalle" class="w3-input w3-border w3-round-medium" type="text" name="detalle_regdocumentos" ng-model="detalle" placeholder="Descripción del movimiento">
+                            <!--h4>Detalle</h4>
+                            <input id="regdocumentos-InputDetalle" class="w3-input w3-border w3-round-medium" type="text" name="detalle_regdocumentos" ng-model="detalle" placeholder="Descripción del movimiento"-->
 
                             <hr>
                             <div class="w3-row">
@@ -711,7 +723,7 @@
                                 <div class="w3-col m5 l5">
                                     <select id="regdocumentos-InputDocumento" class="w3-select w3-round-medium" name="documento_regdocumentos" title="Lista de Documentos" ng-model="regdocumentos_documento" ng-init="regdocumentos_documento = ''"
                                     ng-mouseleave="setDocTipo()"
-                                    ng-mousedown="updateDocumentosTable()">
+                                    ng-mousedown="updateDocumentosTable();">
                                       <option value="" disabled selected>Seleccione</option>
                                       <option ng-repeat = "doc in data_documentos" value="{{doc.Nombre}}">{{doc.Nombre}}</option>
                                   </select>
@@ -723,8 +735,11 @@
                                     <input class="w3-input w3-border w3-round-medium" type="text" name="docnum_regdocumentos" ng-model="docNum" placeholder="N° Documento" value="">
                                 </div>
                             </div>
-                            <div class="w3-row" style="display: none;">
 
+                            <div class="w3-row" style="display: none;">
+                                <div class="w3-col m4 l4" ng-repeat="doc in data_documentos | filter:regdocumentos_documento">
+                                    <input id="regdocumentos-InputDocAbrev" class="w3-input w3-center w3-rightbar w3-leftbar" type="text" placeholder="Abrev = {{ doc.Abrev}}" value="{{ doc.Abrev}}" ng-if="regdocumentos_documento !== ''" disabled>
+                                </div>
                                 <div class="w3-col m4 l4" ng-repeat="doc in data_documentos | filter:regdocumentos_documento">
                                     <input id="regdocumentos-InputDocTipo" class="w3-input w3-center w3-rightbar w3-leftbar" type="text" placeholder="Tipo = {{ doc.Tipo}}" value="{{ doc.Tipo}}" ng-if="regdocumentos_documento !== ''" disabled>
                                 </div>
@@ -736,12 +751,26 @@
                                 </div>
 
                             </div>
+
                             <div class="w3-row">
-                                <div class="w3-col m9 l9">
+                                <div class="w3-col m2 l2">
+                                    <h4>Almacen</h4>
+                                </div>
+                                <div class="w3-col m1 l1">
+                                    <p></p>
+                                </div>
+                                <div class="w3-col m5 l5">
+                                    <select id="regdocumentos-InputAlmacen" class="w3-select w3-round-medium" name="almacen_regdocumentos" title="Lista de Almacenes" ng-model="almacen"
+                                    ng-mousedown="updateZSTable()">
+                                        <option value="" disabled selected>Seleccione</option>
+                                        <option ng-repeat = "alm in data_zonasSucursales" value="{{alm.Abrev}}">{{alm.Nombre}}</option>
+                                    </select>
+                                </div>
+                                <div class="w3-col m1 l1">
                                     <p></p>
                                 </div>
                                 <div class="w3-col m3 l3">
-                                    <input class="w3-input w3-border w3-round-medium" type="text" name="guia_regdocumentos" ng-model="guia" placeholder="N° Guía" value="">
+                                    <input class="w3-input w3-border w3-round-medium" type="text" name="guia_regdocumentos" ng-model="factura" placeholder="N° Factura" value="">
                                 </div>
                             </div>
                             <hr>
@@ -763,7 +792,11 @@
                                     <p></p>
                                 </div>
                                 <div class="w3-col m3 l3">
-                                    <p></p>
+                                    <select  class="w3-select w3-round-medium"  title="Flete a cargo de cliente o Trammo" ng-model="flete">
+                                        <option value="" disabled selected>Flete</option>
+                                        <option value="CLIENTE" >CLIENTE</option>
+                                        <option value="TRAMMO" >TRAMMO</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="w3-row" style="display: none;">
@@ -777,9 +810,8 @@
                                     <input class="w3-input w3-center w3-rightbar w3-leftbar" type="text" placeholder="ID = {{ter.ID}}" ng-if="regdocumentos_tercero !== ''" disabled>
                                 </div>
                             </div>
-                            <hr>
 
-                            <div class="w3-row w3-margin-top">
+                            <div class="w3-row w3-margin-top" style="display:none;">
                                 <div class="w3-col m2 l2">
                                     <h4>Producto</h4>
                                 </div>
@@ -796,6 +828,7 @@
                                     <input class="w3-input w3-border w3-round-medium" type="text" placeholder="ID = {{productId}}" disabled>
                                 </div>
                             </div>
+
                             <hr class="w3-border w3-border-red">
                             <input class="meraki-search w3-input w3-animate-input w3-light-grey w3-round-medium w3-margin-top" type="text"  ng-model="regdocumentos_prod_filter" placeholder="filtrar productos" style="width:50%">
                         </div>
@@ -812,19 +845,19 @@
                         <tr>
                             <th ng-click="orderByMe('ID')">ID</th>
                             <th ng-click="orderByMe('Grupo')">Grupo</th>
-                            <th ng-click="orderByMe('Zona')">Zona</th>
+                            <th ng-click="orderByMe('IGV')">IGV</th>
                             <th ng-click="orderByMe('Nombre')">Nombre</th>
                             <th ng-click="orderByMe('Unidad')">Unidad Medida</th>
                             <th ng-click="orderByMe('Stock')">Stock</th>
                         </tr>
-                        <tr class="prodList-table w3-hover-blue-gray" ng-repeat="x in data_productos | orderBy:myOrderBy | filter:regdocumentos_prod_filter" ng-click="showPrice($event,x.ID)" onclick="activeLink(event, 'prodList-table')">
+                        <tr class="prodList-table w3-hover-blue-gray" ng-repeat="x in data_productos | orderBy:myOrderBy | filter:regdocumentos_prod_filter" ng-click="showFactor($event,x.ID)" onclick="activeLink(event, 'prodList-table')">
                             <td>{{ x.ID }}</td>
                             <td>{{ x.Grupo }}</td>
-                            <td>{{ x.Zona }}</td>
+                            <td>{{ x.IGV }}</td>
                             <td>{{ x.Nombre }}</td>
                             <td>{{ x.Unidad }}</td>
                             <td>{{ x.Stock }}</td>
-                            <td style="display:none">{{ x.Venta }}</td>
+                            <td style="display:none">{{ x.Factor }}</td>
                             <td style="display:none">{{ x.Moneda }}</td>
                             <td style="display:none">{{ x.Compra }}</td>
                         </tr>
@@ -838,19 +871,19 @@
                     <div class="w3-col s0 m8 l8">
                         <div class="w3-row-padding w3-center">
                             <div class="w3-col m6 l3">
-                                <h4 class="meraki-font-s6 meraki-border-bottom">CANTIDAD</h4>
+                                <h4 class="meraki-font-s6 meraki-border-bottom">TONELADAS</h4>
                             </div>
                             <div class="w3-col m6 l2">
-                                <input id="regdocumentos-InputCantidad"class="w3-input w3-xlarge w3-text-bold w3-round-medium" ng-model="cantidad" type="number">
+                                <input id="regdocumentos-InputCantidad"class="w3-input w3-xlarge w3-text-bold w3-round-medium" ng-model="cantidad" ng-keyup="calcBultos()" type="number">
                             </div>
                             <div class="w3-col m0 l1">
                                 <p></p>
                             </div>
                             <div class="w3-col m6 l3">
-                                <h4 class="meraki-font-s6 meraki-border-bottom">PRECIO DE {{priceText}}</h4>
+                                <h4 class="meraki-font-s6 meraki-border-bottom">BULTOS</h4>
                             </div>
                             <div class="w3-col m6 l3">
-                                <input class="w3-input w3-ana-508 w3-xlarge w3-text-bold w3-round-medium" type="text" name="" value="{{price + ' ' + moneda}}" disabled>
+                                <input class="w3-input w3-ana-508 w3-xlarge w3-text-bold w3-round-medium" type="text" name="" value="{{bultos}}" disabled>
                             </div>
                         </div>
 
@@ -880,41 +913,39 @@
                     <table class="w3-table-all w3-card-4 w3-text-dark-grey">
                         <tr>
                             <th>ID</th>
-                            <th>Fecha</th>
-                            <th>Doc.</th>
-                            <th>N°Doc</th>
-                            <th>N°Guía</th>
-                            <th>Tercero</th>
-                            <th>Detalle</th>
-                            <th>ID Prod.</th>
-                            <th>Prod.</th>
-                            <th>Moneda</th>
-                            <th>(E)Cantidad</th>
-                            <th>(E)P.Unitario</th>
-                            <th>(E)Total</th>
-                            <th>(S)Cantidad</th>
-                            <th>(S)P.Unitario</th>
-                            <th>(S)Total</th>
-                            <th>Stock</th>
+                            <th>DOC</th>
+                            <th>ALM</th>
+                            <th>FCH_MOV</th>
+                            <th>TIPO_MOV</th>
+                            <th>TIPO_TRAN</th>
+                            <th>NOM_CLIENTE</th>
+                            <th>FA</th>
+                            <th>PROD</th>
+                            <th>TM</th>
+                            <th>BULTOS</th>
+                            <th>PRESENTACION</th>
+                            <th>FLETE</th>
+                            <th>ENTRADA</th>
+                            <th>SALIDA</th>
+                            <th>STOCK</th>
                         </tr>
                         <tr class="resumen-table w3-hover-blue-gray" ng-repeat="x in DataCollected | filter:regdocumentos_resumen_filter" onclick="activeLink(event, 'resumen-table')">
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ x.Fecha }}</td>
-                            <td>{{ x.Doc }}</td>
-                            <td>{{ x.Docnum }}</td>
-                            <td>{{ x.Guia }}</td>
-                            <td>{{ x.Tercero }}</td>
-                            <td>{{ x.Detalle }}</td>
-                            <td>{{ x.IDProd }}</td>
-                            <td>{{ x.Prod }}</td>
-                            <td>{{ x.Moneda}}</td>
-                            <td>{{ x.ECantidad }}</td>
-                            <td>{{ x.EPUnitario }}</td>
-                            <td>{{ x.ETotal }}</td>
-                            <td>{{ x.SCantidad }}</td>
-                            <td>{{ x.SPUnitario }}</td>
-                            <td>{{ x.STotal }}</td>
-                            <td>{{ DataCollected[$index].Stock }}</td>
+                            <td>{{ x.DOC }}</td>
+                            <td>{{ x.ALM }}</td>
+                            <td>{{ x.FCH_MOV }}</td>
+                            <td>{{ x.TIPO_MOV }}</td>
+                            <td>{{ x.TIPO_TRAN }}</td>
+                            <td>{{ x.NOM_CLIENTE }}</td>
+                            <td>{{ x.FA }}</td>
+                            <td>{{ x.PROD }}</td>
+                            <td>{{ x.TM}}</td>
+                            <td>{{ x.BULTOS }}</td>
+                            <td>{{ x.PRESENTACION }}</td>
+                            <td>{{ x.FLETE }}</td>
+                            <td>{{ x.ENTRADA }}</td>
+                            <td>{{ x.SALIDA }}</td>
+                            <td>{{ DataCollected[$index].STOCK_ACTUAL }}</td>
                         </tr>
                     </table>
                 </div>
@@ -1373,18 +1404,24 @@
             $scope.grupo_seleccionado = '';
             $scope.regdocumentos_documento = '';
             $scope.regdocumentos_tercero = '';
-            $scope.price = 0;
-            $scope.fecha = '';
-            $scope.detalle = '';
+            $scope.almacen = '';
+            $scope.bultos = 0;
+            $scope.factorMov = 0;
+            $scope.fecha = $filter('date')(Date.now(), 'dd-MM-yyyy');
+            $scope.fechaEspecial = $filter('date')(Date.now(), 'yy');
             $scope.moneda = '';
             $scope.product = 'Seleccione un producto';
             $scope.productId = '';
+            $scope.ProductUnidad = '';
             $scope.stock = '';
             $scope.temp_stock = [];
-            $scope.guia = '';
+            $scope.factura = '';
+            $scope.flete = '';
             $scope.docNum = '';
             $scope.docNat = '';
             $scope.docTipo = '';
+            $scope.docAbrev = '';
+            $scope.correlativo = 0;
             $scope.compra = '';
             $scope.venta = 0;
             $scope.priceText = '...';
@@ -1393,18 +1430,27 @@
             $scope.workProdIndex = -1;
             var collect = true;
 
+            $scope.test = function(){
+                alert($scope.almacen);
+            }
             $scope.orderByMe = function(x) {
                 $scope.myOrderBy = x;
             }
 
-            $scope.showPrice = function(myE, prodID) {
+            $scope.calcBultos = function(){
+                $scope.bultos = ($scope.cantidad * 1000) / $scope.factorMov;
+            }
+
+            $scope.showFactor = function(myE, prodID) {
                 var row = angular.element(myE.currentTarget);
-                $scope.venta = row[0].cells[6].innerHTML;
+                $scope.factorMov = Number(row[0].cells[6].innerHTML || 0);
                 $scope.product = row[0].cells[3].innerHTML;
+                $scope.productUnidad = row[0].cells[4].innerHTML;
                 $scope.stock = row[0].cells[5].innerHTML;
                 $scope.productId = row[0].cells[0].innerHTML;
                 $scope.moneda = row[0].cells[7].innerHTML;
                 $scope.compra = row[0].cells[8].innerHTML;
+                $scope.bultos = ($scope.cantidad * 1000) / $scope.factorMov;
                 $scope.setDocTipo();
                 // alert('prodID: ' + prodID);
                 if (prodID !== $scope.workProdIndex) {
@@ -1437,10 +1483,12 @@
 
                 var docTipo = angular.element(document.querySelector('#regdocumentos-InputDocTipo'));
                 var docNat = angular.element(document.querySelector('#regdocumentos-InputDocNat'));
+                var docAbrev = angular.element(document.querySelector('#regdocumentos-InputDocAbrev'));
 
                 if (docTipo[0] !== undefined) {
                     $scope.docTipo = docTipo[0].value;
                     $scope.docNat = docNat[0].value;
+                    $scope.docAbrev = docAbrev[0].value;
 
                     if ($scope.docNat === 'entrada') {
                         $scope.priceText = 'COMPRA';
@@ -1457,22 +1505,15 @@
 
             $scope.collectData = function(){
                 if ($scope.fecha === '') {
-                    alert('Fecha no seleccionada');
+                    alert('Seleccione una fecha');
                     collect = false;
                     return;
                 }else {
                     collect = true;
                 }
 
-                if ($scope.detalle === '') {
-                    collect = confirm('Continuar sin detalle ?');
-                    if (!collect) {
-                        return;
-                    }
-                }
-
                 if ($scope.regdocumentos_documento === '') {
-                    alert('Documento no seleccionado');
+                    alert('Seleccione un documento');
                     collect = false;
                     return;
                 }else {
@@ -1486,15 +1527,15 @@
                     }
                 }
 
-                if ($scope.guia === '') {
-                    collect = confirm('Continuar sin número de guía ?');
+                if ($scope.factura === '') {
+                    collect = confirm('Continuar sin numero de factura');
                     if (!collect) {
                         return;
                     }
                 }
 
                 if ($scope.regdocumentos_tercero === '') {
-                    alert('Tercero no seleccionado');
+                    alert('Seleccione un tercero');
                     collect = false;
                     return;
                 }else {
@@ -1502,7 +1543,7 @@
                 }
 
                 if ($scope.product === '') {
-                    alert('Producto no seleccionado');
+                    alert('Seleccione un producto');
                     collect = false;
                     return;
                 }else {
@@ -1510,7 +1551,7 @@
                 }
 
                 if ($scope.cantidad === 0) {
-                    alert('Cantidad no asignada');
+                    alert('Asigne una cantidad');
                     collect = false;
                     return;
                 }
@@ -1539,7 +1580,8 @@
 
                         }
                         //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
-                        var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":$scope.cantidad,"SPUnitario":$scope.price,"STotal":$scope.price*$scope.cantidad,"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":'',"SALIDA":$scope.cantidad, "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        //var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":$scope.cantidad,"SPUnitario":$scope.price,"STotal":$scope.price*$scope.cantidad,"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }else if ($scope.docNat === 'entrada') {
                         if ($scope.temp_stock[$scope.workProdIndex - 1].stock === 0) {
                             $scope.temp_stock[$scope.workProdIndex - 1].stock = Number($scope.stock || 0) + $scope.cantidad;
@@ -1547,9 +1589,11 @@
                             $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock + $scope.cantidad;
                         }
                         //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
-                        var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":$scope.cantidad,"EPUnitario":$scope.price,"ETotal":$scope.price*$scope.cantidad,"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":$scope.cantidad,"SALIDA":'', "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        //var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":$scope.cantidad,"EPUnitario":$scope.price,"ETotal":$scope.price*$scope.cantidad,"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }else if ($scope.docNat === 'ajuste') {
-                        var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":'',"SALIDA":'', "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        //var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }
 
                     $scope.DataCollected.push(tempDataCollected);
@@ -1790,11 +1834,12 @@
         function ZS_showCells(owner) {
             document.getElementById("ZSInputID").value = owner.cells[0].innerHTML;
             document.getElementById("ZSInputID_form").value = owner.cells[0].innerHTML;
-            document.getElementById("ZSInputNombre").value = owner.cells[1].innerHTML;
-            document.getElementById("ZSInputDireccion").value = owner.cells[2].innerHTML;
-            document.getElementById("ZSInputSupervisor").value = owner.cells[3].innerHTML;
-            document.getElementById("ZSInputMail").value = owner.cells[4].innerHTML;
-            document.getElementById("ZSInputTelefono").value = owner.cells[5].innerHTML;
+            document.getElementById("ZSInputAbrev").value = owner.cells[1].innerHTML;
+            document.getElementById("ZSInputNombre").value = owner.cells[2].innerHTML;
+            document.getElementById("ZSInputDireccion").value = owner.cells[3].innerHTML;
+            document.getElementById("ZSInputSupervisor").value = owner.cells[4].innerHTML;
+            document.getElementById("ZSInputMail").value = owner.cells[5].innerHTML;
+            document.getElementById("ZSInputTelefono").value = owner.cells[6].innerHTML;
 
         }
 

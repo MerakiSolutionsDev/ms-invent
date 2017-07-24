@@ -18,7 +18,7 @@
     }
 
     if(isset($_POST['CrearZS'])){
-        $sql = "INSERT INTO zonas_sucursales (nombre, dir, supervisor, mail, tel) VALUES ('".$_POST['nombre_ZonaSucursal']."','".$_POST['supervisor_ZonaSucursal']."','".$_POST['mail_ZonaSucursal']."','".$_POST['direccion_ZonaSucursal']."','".$_POST['telefono_ZonaSucursal']."')";
+        $sql = "INSERT INTO zonas_sucursales (abrev, nombre, dir, supervisor, mail, tel) VALUES ('".$_POST['abrev_ZonaSucursal']."','".$_POST['nombre_ZonaSucursal']."','".$_POST['supervisor_ZonaSucursal']."','".$_POST['mail_ZonaSucursal']."','".$_POST['direccion_ZonaSucursal']."','".$_POST['telefono_ZonaSucursal']."')";
 
         if (mysqli_query($conn, $sql)){
             print_r ("Almacen creado satisfactoriamente!");

@@ -35,9 +35,8 @@
         $outp .= '"BULTOS":"' . $row['bultos'] . '",';
         $outp .= '"PRESENTACION":"' . $row['presentacion'] . '",';
         $outp .= '"FLETE":"' . $row['flete'] . '",';
-        $outp .= '"ENTRADA":"' . $row['entrada'] . '",';
-        $outp .= '"SALIDA":"' . $row['salida'] . '",';
-        $outp .= '"STOCK":"' . $row['stock'] . '",';
+        $outp .= '"INICIO":"' . $row['inicio'] . '",';
+        $outp .= '"FIN":"' . $row['fin'] . '",';
         $outp .= '"RegDate":"' . $row['regDate'] . '"}';
     }
 

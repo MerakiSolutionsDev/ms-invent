@@ -1174,44 +1174,42 @@
                         <thead class="w3-small">
                             <tr>
                                 <th class="w3-border-right w3-border-gray">Operación</th>
-                                <th>ITEM</th>
+                                <th class="w3-border-right w3-border-gray">ITEM</th>
                                 <th>DOC</th>
                                 <th>ALM</th>
                                 <th>FCH_MOV</th>
                                 <th class="w3-border-right w3-border-gray">TIPO_MOV</th>
                                 <th>TIPO_TRAN</th>
                                 <th>NOM_CLIENTE</th>
-                                <th>FA</th>
+                                <th class="w3-border-right w3-border-gray">FA</th>
                                 <th>PROD</th>
-                                <th class="w3-border-right w3-border-gray">TM</th>
+                                <th>TM</th>
                                 <th>BULTOS</th>
                                 <th>PRESENTACION</th>
-                                <th>FLETE</th>
-                                <th>ENTRADA</th>
-                                <th>SALIDA</th>
-                                <th class="w3-border-right w3-border-gray">STOCK</th>
+                                <th class="w3-border-right w3-border-gray">FLETE</th>
+                                <th>INICIO</th>
+                                <th>FIN</th>
                             </tr>
                         </thead>
 
                         <tbody class="w3-small meraki-font-s5">
                             <tr ng-repeat="x in data_query" ng-if="x.Operacion > 0">
                                 <td class="w3-border-right w3-border-gray">{{ x.Operacion }}</td>
-                                <td>{{ x.ID }}</td>
+                                <td class="w3-border-right w3-border-gray">{{ x.ID }}</td>
                                 <td>{{ x.DOC }}</td>
                                 <td>{{ x.ALM }}</td>
                                 <td>{{ x.FCH_MOV }}</td>
                                 <td class="w3-border-right w3-border-gray">{{ x.TIPO_MOV}}</td>
                                 <td>{{ x.TIPO_TRAN }}</td>
                                 <td>{{ x.NOM_CLIENTE }}</td>
-                                <td>{{ x.FA }}</td>
+                                <td class="w3-border-right w3-border-gray">{{ x.FA }}</td>
                                 <td>{{ x.PROD }}</td>
-                                <td class="w3-border-right w3-border-gray">{{ x.TM}}</td>
+                                <td>{{ x.TM}}</td>
                                 <td>{{ x.BULTOS }}</td>
                                 <td>{{ x.PRESENTACION }}</td>
-                                <td>{{ x.FLETE }}</td>
-                                <td>{{ x.ENTRADA }}</td>
-                                <td>{{ x.SALIDA }}</td>
-                                <td class="w3-border-right w3-border-gray">{{ x.STOCK }}</td>
+                                <td class="w3-border-right w3-border-gray">{{ x.FLETE }}</td>
+                                <td>{{ x.INICIO }}</td>
+                                <td>{{ x.FIN }}</td>
                             </tr>
                         </tbody>
                     </table>

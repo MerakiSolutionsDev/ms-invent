@@ -22,7 +22,7 @@
 
     if (count($data) > 0) {
 
-        $query1 = "SELECT id_transaction FROM `regdocumentos` ORDER BY id DESC LIMIT 1";
+        /*$query1 = "SELECT id_transaction FROM `regdocumentos` ORDER BY id DESC LIMIT 1";
 
         $result = mysqli_query($connect,$query1);
 
@@ -30,11 +30,13 @@
             $id_transaction = $row['id_transaction'];
         }
 
-        $id_transaction = intval($id_transaction) + 1;
+        $id_transaction = intval($id_transaction) + 1;*/
 
         for ($i=0; $i < count($data); $i++) {
 
+
             $id_resumen = $i + 1;
+            $_CORR          = mysqli_real_escape_string($connect, $data[$i]->CORR);
             $_DOC           = mysqli_real_escape_string($connect, $data[$i]->DOC);
             $_ALM           = mysqli_real_escape_string($connect, $data[$i]->ALM);
             $_FCH_MOV       = mysqli_real_escape_string($connect, $data[$i]->FCH_MOV);
@@ -51,7 +53,7 @@
             $_SALIDA        = mysqli_real_escape_string($connect, $data[$i]->SALIDA);
             $_STOCK         = mysqli_real_escape_string($connect, $data[$i]->STOCK);
 
-            $query2 = "INSERT INTO `regdocumentos` (id_transaction,id_resumen,doc,alm,fch_mov, tipo_mov,tipo_tran,nom_cliente,fa,prod,tm,bultos,presentacion,flete,entrada,salida,stock) VALUES ('$id_transaction','$id_resumen','$_DOC','$_ALM','$_FCH_MOV','$_TIPO_MOV','$_TIPO_TRAN','$_NOM_CLIENTE','$_FA','$_PROD','$_TM','$_BULTOS','$_PRESENTACION','$_FLETE','$_ENTRADA','$_SALIDA','$_STOCK')";
+            $query2 = "INSERT INTO `regdocumentos` (id_transaction,id_resumen,doc,alm,fch_mov, tipo_mov,tipo_tran,nom_cliente,fa,prod,tm,bultos,presentacion,flete,entrada,salida,stock) VALUES ('$_CORR','$id_resumen','$_DOC','$_ALM','$_FCH_MOV','$_TIPO_MOV','$_TIPO_TRAN','$_NOM_CLIENTE','$_FA','$_PROD','$_TM','$_BULTOS','$_PRESENTACION','$_FLETE','$_ENTRADA','$_SALIDA','$_STOCK')";
 
             if(mysqli_query($connect,$query2)){
                 $counter = $counter + 1;

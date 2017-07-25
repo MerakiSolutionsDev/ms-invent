@@ -28,7 +28,10 @@
 
     $id_transaction = intval($id_transaction) + 1;
 
-    $outp .= '{"Operacion":"' . $row['id_transaction'] . '"}';
+    $outp .= '{"CORR":"' . $id_transaction . '"}';
+    $outp ='{"records":['.$outp.']}';
 
-    echo $out;
+    mysqli_close($conn);
+
+    echo $outp;
 ?>

@@ -1426,7 +1426,18 @@
             $scope.cantidad = 0;
             $scope.DataCollected = [];
             $scope.workProdIndex = -1;
+            $scope.correlativo = 0;
             var collect = true;
+
+            $http.get("../php/correlativo_mysql.php").then(function(response) {
+                $scope.correlativo = response.data.records.CORR;
+            });
+
+            $scope.queryCorrelativo = function() {
+                $http.get("../php/correlativo_mysql.php").then(function(response) {
+                    $scope.correlativo = response.data.records.CORR;
+                });
+            }
 
             $scope.test = function(){
                 alert($scope.almacen);
@@ -1615,14 +1626,30 @@
                     if (confirm("Descartar último ingreso a resumen ?")) {
 
                         if ($scope.docNat === 'salida') {
-                            alert($scope.docNat+''+$scope.workProdIndex);
-                            $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock + Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0);
-                            alert($scope.DataCollected[$scope.DataCollected.length -1].TM);
-                            alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
+                            for (var i = 0; i < $scope.temp_stock.length; i++) {
+                                alert($scope.temp_stock[i].index+','+$scope.DataCollected[$scope.DataCollected.length -1].PROD_ID);
+                                if ($scope.temp_stock[i].index === $scope.DataCollected[$scope.DataCollected.length -1].PROD_ID) {
+                                    $scope.temp_stock[i].stock = Number($scope.temp_stock[i].stock || 0) + Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0);
+                                    alert(Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0));
+                                    alert($scope.temp_stock[i].stock);
+                                }
+                            }
+                            //alert($scope.docNat+''+$scope.workProdIndex);
+                            /*$scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock + Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0);*/
+                            //alert($scope.DataCollected[$scope.DataCollected.length -1].TM);
+                            //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
                         }
                         if ($scope.docNat === 'entrada') {
+                            for (var i = 0; i < $scope.temp_stock.length; i++) {
+                                alert($scope.temp_stock[i].index+','+$scope.DataCollected[$scope.DataCollected.length -1].PROD_ID);
+                                if ($scope.temp_stock[i].index === $scope.DataCollected[$scope.DataCollected.length -1].PROD_ID) {
+                                    $scope.temp_stock[i].stock = Number($scope.temp_stock[i].stock || 0) - Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0);
+                                    alert(Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0));
+                                    alert($scope.temp_stock[i].stock);
+                                }
+                            }
                             //alert($scope.docNat+''+$scope.workProdIndex);
-                            $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock - Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0);
+                            /*$scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock - Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0);*/
                             //alert($scope.DataCollected[$scope.DataCollected.length -1].TM);
                             //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
                         }
@@ -1644,6 +1671,8 @@
                         $scope.temp_stock = [];
 
                         $scope.workProdIndex = -1;
+                        $scope.bultos = 0;
+                        $scope.cantidad = 0;
                     }
                 }else{
                     alert("Resumen vacío ...");

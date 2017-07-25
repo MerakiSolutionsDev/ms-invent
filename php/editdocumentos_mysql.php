@@ -23,22 +23,21 @@
         if ($outp != "") {$outp .= ",";}
         $outp .= '{"Operacion":"' . $row['id_transaction'] . '",';
         $outp .= '"ID":"' . $row['id_resumen'] . '",';
-        $outp .= '"Fecha":"' . $row['fecha'] . '",';
-        $outp .= '"Doc":"' . $row['doc'] . '",';
-        $outp .= '"DocNum":"' . $row['docnum'] . '",';
-        $outp .= '"Guia":"' . $row['guia'] . '",';
-        $outp .= '"Tercero":"' . $row['tercero'] . '",';
-        $outp .= '"Detalle":"' . $row['detalle'] . '",';
-        $outp .= '"IDProd":"' . $row['idprod'] . '",';
-        $outp .= '"Prod":"' . $row['prod'] . '",';
-        $outp .= '"Moneda":"' . $row['moneda'] . '",';
-        $outp .= '"SCantidad":"' . $row['scantidad'] . '",';
-        $outp .= '"SPUnitario":"' . $row['spunitario'] . '",';
-        $outp .= '"STotal":"' . $row['stotal'] . '",';
-        $outp .= '"ECantidad":"' . $row['ecantidad'] . '",';
-        $outp .= '"EPUnitario":"' . $row['epunitario'] . '",';
-        $outp .= '"ETotal":"' . $row['etotal'] . '",';
-        $outp .= '"Stock":"' . $row['stock'] . '",';
+        $outp .= '"DOC":"' . $row['doc'] . '",';
+        $outp .= '"ALM":"' . $row['alm'] . '",';
+        $outp .= '"FCH_MOV":"' . $row['fch_mov'] . '",';
+        $outp .= '"TIPO_MOV":"' . $row['tipo_mov'] . '",';
+        $outp .= '"TIPO_TRAN":"' . $row['tipo_tran'] . '",';
+        $outp .= '"NOM_CLIENTE":"' . $row['nom_cliente'] . '",';
+        $outp .= '"FA":"' . $row['fa'] . '",';
+        $outp .= '"PROD":"' . $row['prod'] . '",';
+        $outp .= '"TM":"' . $row['tm'] . '",';
+        $outp .= '"BULTOS":"' . $row['bultos'] . '",';
+        $outp .= '"PRESENTACION":"' . $row['presentacion'] . '",';
+        $outp .= '"FLETE":"' . $row['flete'] . '",';
+        $outp .= '"ENTRADA":"' . $row['entrada'] . '",';
+        $outp .= '"SALIDA":"' . $row['salida'] . '",';
+        $outp .= '"STOCK":"' . $row['stock'] . '",';
         $outp .= '"RegDate":"' . $row['regDate'] . '"}';
     }
 

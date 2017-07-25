@@ -542,7 +542,7 @@
                                     <h4>IGV</h4>
                                 </div>
                                 <div class="w3-col m6 l6">
-                                    <select id="productos-InputIGV" class="w3-select w3-round-medium" name="zona_productos" title="Producto Afecto o Inafecto" ng-model="productos_igv">
+                                    <select id="productos-InputIGV" class="w3-select w3-round-medium" name="igv_productos" title="Producto Afecto o Inafecto" ng-model="productos_igv">
                                         <option value="" disabled selected>Seleccione</option>
                                         <option value = "AFECTO" >AFECTO</option>
                                         <option value = "INAFECTO" >INAFECTO</option>
@@ -1125,38 +1125,38 @@
                     <fieldset>
                         <legend>Criterios para productos:</legend>
                         <div class="w3-row-padding">
-                            <div class="w3-third">
+                            <!--div class="w3-third">
                                 <input ng-model="prodCriteria" class="w3-radio" name="consultas_RadioProd" type="radio" ng-value="1">
                                 <label for="radio">Ver todos los productos </label>
-                            </div>
+                            </div-->
                             <div class="w3-third">
-                                <input ng-model="prodCriteria" class="w3-radio" name="consultas_RadioProd" type="radio" ng-value="2">
-                                <label for="radio"> Seleccione el producto:</label>
+                                <input ng-model="prodCriteria" class="w3-radio" name="consultas_RadioProd" type="radio" ng-value="2" checked style="display:none;">
+                                <!--label for="radio"> Seleccione el producto:</label-->
                                 <select ng-model="prodCriteria_nombre" class="w3-select w3-margin-top">
                                     <option value="" selected disabled>Producto</option>
                                     <option ng-repeat="x in data_productos | unique: 'Nombre'" value="{{x.Nombre}}">{{x.Nombre}}</option>
                                 </select>
                             </div>
-                            <!--div class="w3-third">
-                                <input ng-model="prodCriteria" class="w3-radio" name="radio" type="radio" ng-value="3">
-                                <label>Filtrar productos </label>
+                            <div class="w3-third">
+                                <input ng-model="prodCriteria" class="w3-radio" name="radio" type="radio" ng-value="3" style="display:none;">
+                                <!--label>Filtrar productos </label>
                                 <select class="w3-select w3-margin-top">
                                     <option value="" selected disabled>Grupo</option>
                                     <option ng-repeat="x in data_productos | unique: 'Grupo'" value="{{x.Grupo}}">{{x.Grupo}}</option>
+                                </select-->
+                                <select ng-model="prodCriteria_zona" class="w3-select w3-margin-top">
+                                    <option value="" selected disabled>Almacen</option>
+                                    <option ng-repeat="x in data_zonasSucursales | unique: 'Abrev'" value="{{x.Abrev}}">{{x.Nombre}}</option>
                                 </select>
-                                <select class="w3-select w3-margin-top">
-                                    <option value="" selected disabled>Zona</option>
-                                    <option ng-repeat="x in data_productos | unique: 'Zona'" value="{{x.Zona}}">{{x.Zona}}</option>
-                                </select>
-                                <select class="w3-select w3-margin-top">
+                                <!--select class="w3-select w3-margin-top">
                                     <option value="" selected disabled>Unidad</option>
                                     <option ng-repeat="x in data_productos | unique: 'Unidad'" value="{{x.Unidad}}">{{x.Unidad}}</option>
                                 </select>
                                 <select class="w3-select w3-margin-top">
                                     <option value="" selected disabled>Detalles</option>
                                     <option ng-repeat="x in data_productos | unique: 'Detalles'" value="{{x.Detalles}}">{{x.Detalles}}</option>
-                                </select>
-                            </div-->
+                                </select-->
+                            </div>
                         </div>
                     </fieldset>
                 </div>
@@ -1175,23 +1175,22 @@
                         <thead class="w3-small">
                             <tr>
                                 <th class="w3-border-right w3-border-gray">Operación</th>
-                                <th>Item</th>
-                                <th>Fecha</th>
-                                <th>Doc.</th>
-                                <th>N°Doc</th>
-                                <th class="w3-border-right w3-border-gray">N°Guía</th>
-                                <th>Tercero</th>
-                                <th>Detalle</th>
-                                <th>ID Prod.</th>
-                                <th>Prod.</th>
-                                <th class="w3-border-right w3-border-gray">Moneda</th>
-                                <th>(E)Cantidad</th>
-                                <th>(E)P.Unitario</th>
-                                <th>(E)Total</th>
-                                <th>(S)Cantidad</th>
-                                <th>(S)P.Unitario</th>
-                                <th class="w3-border-right w3-border-gray">(S)Total</th>
-                                <th>Stock</th>
+                                <th>ITEM</th>
+                                <th>DOC</th>
+                                <th>ALM</th>
+                                <th>FCH_MOV</th>
+                                <th class="w3-border-right w3-border-gray">TIPO_MOV</th>
+                                <th>TIPO_TRAN</th>
+                                <th>NOM_CLIENTE</th>
+                                <th>FA</th>
+                                <th>PROD</th>
+                                <th class="w3-border-right w3-border-gray">TM</th>
+                                <th>BULTOS</th>
+                                <th>PRESENTACION</th>
+                                <th>FLETE</th>
+                                <th>ENTRADA</th>
+                                <th>SALIDA</th>
+                                <th class="w3-border-right w3-border-gray">STOCK</th>
                             </tr>
                         </thead>
 
@@ -1199,22 +1198,21 @@
                             <tr ng-repeat="x in data_query" ng-if="x.Operacion > 0">
                                 <td class="w3-border-right w3-border-gray">{{ x.Operacion }}</td>
                                 <td>{{ x.ID }}</td>
-                                <td>{{ x.Fecha }}</td>
-                                <td>{{ x.Doc }}</td>
-                                <td>{{ x.DocNum }}</td>
-                                <td class="w3-border-right w3-border-gray">{{ x.Guia }}</td>
-                                <td>{{ x.Tercero }}</td>
-                                <td>{{ x.Detalle }}</td>
-                                <td>{{ x.IDProd }}</td>
-                                <td>{{ x.Prod }}</td>
-                                <td class="w3-border-right w3-border-gray">{{ x.Moneda}}</td>
-                                <td>{{ x.ECantidad }}</td>
-                                <td>{{ x.EPUnitario }}</td>
-                                <td>{{ x.ETotal }}</td>
-                                <td>{{ x.SCantidad }}</td>
-                                <td>{{ x.SPUnitario }}</td>
-                                <td class="w3-border-right w3-border-gray">{{ x.STotal }}</td>
-                                <td>{{ x.Stock }}</td>
+                                <td>{{ x.DOC }}</td>
+                                <td>{{ x.ALM }}</td>
+                                <td>{{ x.FCH_MOV }}</td>
+                                <td class="w3-border-right w3-border-gray">{{ x.TIPO_MOV}}</td>
+                                <td>{{ x.TIPO_TRAN }}</td>
+                                <td>{{ x.NOM_CLIENTE }}</td>
+                                <td>{{ x.FA }}</td>
+                                <td>{{ x.PROD }}</td>
+                                <td class="w3-border-right w3-border-gray">{{ x.TM}}</td>
+                                <td>{{ x.BULTOS }}</td>
+                                <td>{{ x.PRESENTACION }}</td>
+                                <td>{{ x.FLETE }}</td>
+                                <td>{{ x.ENTRADA }}</td>
+                                <td>{{ x.SALIDA }}</td>
+                                <td class="w3-border-right w3-border-gray">{{ x.STOCK }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1716,7 +1714,7 @@
             /**/
             $scope.docCriteria          = false;
             $scope.terCriteria          = 0;
-            $scope.prodCriteria         = 0;
+            $scope.prodCriteria         = 2;
             /**/
             $scope.docCriteria_nombre   = '';
             /**/
@@ -1783,8 +1781,11 @@
                     }*/
 
                     if ($scope.prodCriteria === 2) {
-                        if ($scope.prodCriteria_nombre !== null) {
+                        if ($scope.prodCriteria_nombre !== '' || $scope.prodCriteria_zona !== '') {
                             $scope.data_consultas = $filter('filter')($scope.data_consultas, $scope.prodCriteria_nombre);
+                            $scope.data_consultas = $filter('filter')($scope.data_consultas, $scope.prodCriteria_zona);
+                        }else{
+                            alert('Escoja un producto y un almacen');
                         }
                     }
                     $scope.data_query = $scope.data_consultas;
@@ -1796,6 +1797,9 @@
             }
 
             angular.extend(this, $controller('regdocumentos-Ctrl', {
+                $scope: $scope
+            }));
+            angular.extend(this, $controller('ZSCtrl', {
                 $scope: $scope
             }));
             angular.extend(this, $controller('documentos-Ctrl', {

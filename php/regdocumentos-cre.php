@@ -35,24 +35,23 @@
         for ($i=0; $i < count($data); $i++) {
 
             $id_resumen = $i + 1;
-            $_fecha      = mysqli_real_escape_string($connect, $data[$i]->Fecha);
-            $_doc        = mysqli_real_escape_string($connect, $data[$i]->Doc);
-            $_docnum     = mysqli_real_escape_string($connect, $data[$i]->Docnum);
-            $_guia     = mysqli_real_escape_string($connect, $data[$i]->Guia);
-            $_tercero    = mysqli_real_escape_string($connect, $data[$i]->Tercero);
-            $_idprod     = mysqli_real_escape_string($connect, $data[$i]->IDProd);
-            $_prod       = mysqli_real_escape_string($connect, $data[$i]->Prod);
-            $_detalle     = mysqli_real_escape_string($connect, $data[$i]->Detalle);
-            $_moneda     = mysqli_real_escape_string($connect, $data[$i]->Moneda);
-            $_scantidad  = mysqli_real_escape_string($connect, $data[$i]->SCantidad);
-            $_spunitario = mysqli_real_escape_string($connect, $data[$i]->SPUnitario);
-            $_stotal     = mysqli_real_escape_string($connect, $data[$i]->STotal);
-            $_ecantidad  = mysqli_real_escape_string($connect, $data[$i]->ECantidad);
-            $_epunitario = mysqli_real_escape_string($connect, $data[$i]->EPUnitario);
-            $_etotal     = mysqli_real_escape_string($connect, $data[$i]->ETotal);
-            $_stock     = mysqli_real_escape_string($connect, $data[$i]->Stock);
+            $_DOC           = mysqli_real_escape_string($connect, $data[$i]->DOC);
+            $_ALM           = mysqli_real_escape_string($connect, $data[$i]->ALM);
+            $_FCH_MOV       = mysqli_real_escape_string($connect, $data[$i]->FCH_MOV);
+            $_TIPO_MOV      = mysqli_real_escape_string($connect, $data[$i]->TIPO_MOV);
+            $_TIPO_TRAN     = mysqli_real_escape_string($connect, $data[$i]->TIPO_TRAN);
+            $_NOM_CLIENTE   = mysqli_real_escape_string($connect, $data[$i]->NOM_CLIENTE);
+            $_FA            = mysqli_real_escape_string($connect, $data[$i]->FA);
+            $_PROD          = mysqli_real_escape_string($connect, $data[$i]->PROD);
+            $_TM            = mysqli_real_escape_string($connect, $data[$i]->TM);
+            $_BULTOS        = mysqli_real_escape_string($connect, $data[$i]->BULTOS);
+            $_PRESENTACION  = mysqli_real_escape_string($connect, $data[$i]->PRESENTACION);
+            $_FLETE         = mysqli_real_escape_string($connect, $data[$i]->FLETE);
+            $_ENTRADA       = mysqli_real_escape_string($connect, $data[$i]->ENTRADA);
+            $_SALIDA        = mysqli_real_escape_string($connect, $data[$i]->SALIDA);
+            $_STOCK         = mysqli_real_escape_string($connect, $data[$i]->STOCK);
 
-            $query2 = "INSERT INTO `regdocumentos` (id_transaction,id_resumen,fecha,doc,docnum, guia,tercero,detalle,idprod,prod,moneda,scantidad,spunitario,stotal,ecantidad,epunitario,etotal,stock) VALUES ('$id_transaction','$id_resumen','$_fecha','$_doc','$_docnum','$_guia','$_tercero','$_detalle','$_idprod','$_prod','$_moneda','$_scantidad','$_spunitario','$_stotal','$_ecantidad','$_epunitario','$_etotal','$_stock')";
+            $query2 = "INSERT INTO `regdocumentos` (id_transaction,id_resumen,doc,alm,fch_mov, tipo_mov,tipo_tran,nom_cliente,fa,prod,tm,bultos,presentacion,flete,entrada,salida,stock) VALUES ('$id_transaction','$id_resumen','$_DOC','$_ALM','$_FCH_MOV','$_TIPO_MOV','$_TIPO_TRAN','$_NOM_CLIENTE','$_FA','$_PROD','$_TM','$_BULTOS','$_PRESENTACION','$_FLETE','$_ENTRADA','$_SALIDA','$_STOCK')";
 
             if(mysqli_query($connect,$query2)){
                 $counter = $counter + 1;

@@ -723,7 +723,7 @@
                                 </div>
                                 <div class="w3-col m6 l6">
                                     <h4>Fecha</h4>
-                                    <input id="regdocumentos-InputFecha" class="w3-input w3-border w3-round-medium" type="text" name="fecha_regdocumentos" ng-model="fecha" disabled>
+                                    <input id="regdocumentos-InputFecha" class="w3-input w3-border w3-round-medium" type="date" name="fecha_regdocumentos" ng-model="fecha">
                                 </div>
                             </div>
 
@@ -772,17 +772,25 @@
 
                             <div class="w3-row">
                                 <div class="w3-col m2 l2">
-                                    <h4>Almacen</h4>
+                                    <h4>Tercero</h4>
+                                    <!-- <h4>Almacen</h4> -->
+                                    <p></p>
                                 </div>
                                 <div class="w3-col m1 l1">
                                     <p></p>
                                 </div>
                                 <div class="w3-col m5 l5">
-                                    <select id="regdocumentos-InputAlmacen" class="w3-select w3-round-medium" name="almacen_regdocumentos" title="Lista de Almacenes" ng-model="almacen"
+                                    <!-- <select id="regdocumentos-InputAlmacen" class="w3-select w3-round-medium" name="almacen_regdocumentos" title="Lista de Almacenes" ng-model="almacen"
                                     ng-mousedown="updateZSTable()">
                                         <option value="" disabled selected>Seleccione</option>
                                         <option ng-repeat = "alm in data_zonasSucursales" value="{{alm.Abrev}}">{{alm.Nombre}}</option>
+                                    </select> -->
+                                    <select id="regdocumentos-InputTercero" class="w3-select w3-round-medium" name="tercero_regdocumentos" title="Aquí se mostraran los terceros correspondientes al tipo de documentos seleccionado" ng-model="regdocumentos_tercero" ng-init="regdocumentos_tercero = ''"
+                                    ng-mousedown="updateTercerosTable()">
+                                        <option value="" disabled selected>Seleccione</option>
+                                        <option ng-repeat = "ter in data_terceros" value="{{ter.Nombre}}" ng-if="ter.TerceroClass == (docTipo | uppercase)">{{ter.Nombre}}</option>
                                     </select>
+                                    <p></p>
                                 </div>
                                 <div class="w3-col m1 l1">
                                     <p></p>
@@ -794,27 +802,23 @@
                             <hr>
                             <div class="w3-row">
                                 <div class="w3-col m2 l2">
-                                    <h4>Tercero</h4>
+                                    <h4>Flete</h4>
                                 </div>
                                 <div class="w3-col m1 l1">
                                     <p></p>
                                 </div>
                                 <div class="w3-col m5 l5">
-                                    <select id="regdocumentos-InputTercero" class="w3-select w3-round-medium" name="tercero_regdocumentos" title="Aquí se mostraran los terceros correspondientes al tipo de documentos seleccionado" ng-model="regdocumentos_tercero" ng-init="regdocumentos_tercero = ''"
-                                    ng-mousedown="updateTercerosTable()">
+                                    <select  class="w3-select w3-round-medium"  title="Flete a cargo de cliente o Trammo" ng-model="flete">
                                         <option value="" disabled selected>Seleccione</option>
-                                        <option ng-repeat = "ter in data_terceros" value="{{ter.Nombre}}" ng-if="ter.TerceroClass == (docTipo | uppercase)">{{ter.Nombre}}</option>
+                                        <option value="CLIENTE" >CLIENTE</option>
+                                        <option value="TRAMMO" >TRAMMO</option>
                                     </select>
                                 </div>
                                 <div class="w3-col m1 l1">
                                     <p></p>
                                 </div>
                                 <div class="w3-col m3 l3">
-                                    <select  class="w3-select w3-round-medium"  title="Flete a cargo de cliente o Trammo" ng-model="flete">
-                                        <option value="" disabled selected>Flete</option>
-                                        <option value="CLIENTE" >CLIENTE</option>
-                                        <option value="TRAMMO" >TRAMMO</option>
-                                    </select>
+                                    <p></p>
                                 </div>
                             </div>
                             <div class="w3-row" style="display: none;">
@@ -857,11 +861,12 @@
                 </div>
 
                 <!--PRIMERA TABLA-->
-                <div class="w3-container w3-margin-top w3-margin-bottom w3-responsive">
+                <div class="w3-container w3-margin-top w3-margin-bottom w3-responsive" style="height:30vh;">
                     <h4>Lista de Productos</h4>
                     <table class="w3-table-all w3-card-4 w3-text-dark-grey">
                         <tr>
                             <th ng-click="orderByMe('ID')">ID</th>
+                            <th ng-click="orderByMe('Alm')">Almacen</th>
                             <th ng-click="orderByMe('Grupo')">Grupo</th>
                             <th ng-click="orderByMe('IGV')">IGV</th>
                             <th ng-click="orderByMe('Nombre')">Nombre</th>
@@ -870,6 +875,7 @@
                         </tr>
                         <tr class="prodList-table w3-hover-blue-gray" ng-repeat="x in data_productos | orderBy:myOrderBy | filter:regdocumentos_prod_filter" ng-click="showFactor($event,x.ID)" onclick="activeLink(event, 'prodList-table')">
                             <td>{{ x.ID }}</td>
+                            <td>{{ x.Alm }}</td>
                             <td>{{ x.Grupo }}</td>
                             <td>{{ x.IGV }}</td>
                             <td>{{ x.Nombre }}</td>
@@ -1070,7 +1076,7 @@
 
             <!--************ KARDEX ***************-->
             <div id="consultas" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="consultas-Ctrl" style="display: none; margin-top: 75px;">
-                <div class="w3-container w3-ana-509 w3-card-4">
+                <div class="w3-container w3-ana-509 w3-card-4 w3-card-4 w3-round-medium">
                     <h4 class="meraki-font-s6">Cardex</h4>
                 </div>
 
@@ -1236,42 +1242,52 @@
                 <div class="w3-section" style="height:50vh;">
 
                 </div>
+                <div style="height:20vh;">
+                    <p></p>
+                </div>
             </div>
 
             <!--************ INFORMES ***************-->
-            <div id="informes" class="cardexBlock w3-container w3-padding w3-animate-right" ng-controller="ZSCtrl" style="display: none;margin-top: 75px;">
-                <div class="w3-container w3-ana-509 w3-card-4">
+            <div id="informes" class="cardexBlock w3-meraki-s6 w3-container w3-padding w3-animate-right" ng-controller="informes-Ctrl" style="display: none;margin-top: 75px;">
+                <div class="w3-container w3-ana-509 w3-card-4 w3-card-4 w3-round-medium">
                     <h4>Informes</h4>
                 </div>
 
                 <form action="" method="post">
-                    <h3>Fecha de Búsqueda</h3>
-                    <p><input id="informes-InputDateSearch" class="w3-date" type="date" /></p>
-
-                    <h3>Tipo de Contenido en Informe</h3>
-                    <input id="informes-InputResumen" name="informes_RadioTipo" class="w3-radio" type="radio" value="resumen" /> <label>Resumen </label>
-                    <input id="informes-InputDetallesMovimientos" name="informes_RadioTipo" class="w3-radio" type="radio" /> <label> Detalle de movimientos</label>
-                    <p></p>
-
-                    <h3>Informes de Stock</h3>
-                    <div class="w3-row-padding">
-                        <div class="w3-half">
-                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button">STOCK General</button>
-                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button">STOCK Zona</button>
-                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button">STOCK Según Grupo</button>
-                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button">STOCK Alerta y Emergencia</button>
+                    <h4>Fecha de Búsqueda</h4>
+                    <div class="w3-row">
+                        <div class="w3-col s12 m3 l3">
+                            <input id="informes-InputDateSearch" class="w3-input w3-round-medium" type="date" ng-model="fechaInforme"/>
                         </div>
-                        <div class="w3-half">
-                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button">STOCK Auditoria</button>
-                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button">STOCK Semáforo Salidas</button>
-                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button">STOCK Semáforo Entradas</button>
-                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button">STOCK Semáforo Salidas</button>
+                        <div class="w3-col s12 m9 l9">
+                            <p></p>
                         </div>
                     </div>
 
-                    <h3>Informes de Frecuencia</h3>
-                    <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom " type="button">STOCK movimientos</button>
+
+                    <!-- <h3>Tipo de Contenido en Informe</h3>
+                    <input id="informes-InputResumen" name="informes_RadioTipo" class="w3-radio" type="radio" value="resumen" /> <label>Resumen </label>
+                    <input id="informes-InputDetallesMovimientos" name="informes_RadioTipo" class="w3-radio" type="radio" /> <label> Detalle de movimientos</label>
+                    <p></p> -->
+
+                    <h4>Informes de Stock</h4>
+                    <div class="w3-row-padding">
+                        <div class="w3-half">
+                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button" ng-click="stockGeneral()">STOCK General</button>
+
+                        </div>
+                        <div class="w3-half">
+                            <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom" type="button" ng-click="stockGeneral()">STOCK Auditoria</button>
+
+                        </div>
+                    </div>
+
+                    <!-- <h4>Informes de Frecuencia</h4>
+                    <button class="w3-btn w3-block w3-ana-502 meraki-border-bottom w3-margin-bottom " type="button">STOCK movimientos</button> -->
                 </form>
+                <div style="height:50vh;">
+                    <p></p>
+                </div>
             </div>
         </div>
     </div>
@@ -1421,7 +1437,7 @@
             $scope.almacen = '';
             $scope.bultos = 0;
             $scope.factorMov = 0;
-            $scope.fecha = $filter('date')(Date.now(), 'dd-MM-yyyy');
+            $scope.fecha = $filter('date')(Date.now(), 'yyyy-MM-dd');
             $scope.fechaEspecial = $filter('date')(Date.now(), 'yy');
             $scope.moneda = '';
             $scope.product = 'Seleccione un producto';
@@ -1444,6 +1460,8 @@
             $scope.workProdIndex = -1;
             $scope.correlativo = 0;
             var collect = true;
+
+            document.getElementById("regdocumentos-InputFecha").value = $scope.fecha;
 
             $http.get("../php/correlativo_mysql.php").then(function(response) {
                 $scope.correlativo = response.data.records[0].CORR;
@@ -1469,13 +1487,14 @@
 
             $scope.showFactor = function(myE, prodID) {
                 var row = angular.element(myE.currentTarget);
-                $scope.factorMov = Number(row[0].cells[6].innerHTML || 0);
-                $scope.product = row[0].cells[3].innerHTML;
-                $scope.productUnidad = row[0].cells[4].innerHTML;
-                $scope.stock = row[0].cells[5].innerHTML;
+                $scope.factorMov = Number(row[0].cells[7].innerHTML || 0);
+                $scope.product = row[0].cells[4].innerHTML;
+                $scope.productUnidad = row[0].cells[5].innerHTML;
+                $scope.stock = row[0].cells[6].innerHTML;
                 $scope.productId = row[0].cells[0].innerHTML;
-                $scope.moneda = row[0].cells[7].innerHTML;
-                $scope.compra = row[0].cells[8].innerHTML;
+                $scope.almacen = row[0].cells[1].innerHTML;
+                $scope.moneda = row[0].cells[8].innerHTML;
+                $scope.compra = row[0].cells[9].innerHTML;
                 $scope.bultos = ($scope.cantidad * 1000) / $scope.factorMov;
                 $scope.setDocTipo();
                 //alert('prodID: ' + prodID);
@@ -1811,6 +1830,113 @@
             }
         });
         app.controller('consultas-Ctrl', function($scope, $controller, $http, $filter) {
+            $scope.data_consultas       = [];
+            $scope.data_query           = [];
+            $scope.fechaIni             = '';
+            $scope.fechaFin             = '';
+            /**/
+            $scope.docCriteria          = false;
+            $scope.terCriteria          = 0;
+            $scope.prodCriteria         = 2;
+            /**/
+            $scope.docCriteria_nombre   = '';
+            /**/
+            $scope.terCriteria_nombre   = '';
+            $scope.terCriteria_tipo     = '';
+            $scope.terCriteria_ciudad   = '';
+            /**/
+            $scope.prodCriteria_nombre  = '';
+            $scope.prodCriteria_grupo   = '';
+            $scope.prodCriteria_zona    = '';
+            $scope.prodCriteria_unidad  = '';
+            $scope.prodCriteria_detalles= '';
+            /**/
+            $scope.showTableConsultas   = false;
+
+            $scope.exportData_consultas = function (){
+                alasql('SELECT * INTO XLSX("consultas.xlsx",{headers:true}) FROM ?',[$scope.data_query]);
+            }
+
+            $scope.generateQuery = function(){
+
+                $http.get("../php/editdocumentos_mysql.php").then(function(response) {
+                    $scope.data_consultas = response.data.records;
+
+                    var temp_data_consultas = [];
+
+                    $scope.fechaIni = $filter('date')($scope.fechaIni, 'yyyy-MM-dd');
+                    $scope.fechaFin = $filter('date')($scope.fechaFin, 'yyyy-MM-dd');
+                    alert($scope.fechaIni +' --- '+$scope.fechaFin);
+
+                    if ($scope.fechaIni !== '' && $scope.fechaFin !== '') {
+                        alert('inside');
+                        for (var i = 0; i < $scope.data_consultas.length; i++) {
+                            if ($scope.data_consultas[i].FCH_MOV >= $scope.fechaIni && $scope.data_consultas[i].FCH_MOV <= $scope.fechaFin) {
+                                temp_data_consultas.push($scope.data_consultas[i]);
+                            }
+
+                        }
+                        $scope.data_consultas = temp_data_consultas;
+                        alert($scope.data_consultas);
+                    }
+                    /*
+                    if ($scope.docCriteria === true) {
+                        if ($scope.docCriteria_nombre !== null) {
+                            $scope.data_consultas = $filter('filter')($scope.data_consultas, $scope.docCriteria_nombre);
+                        }
+                    }
+
+
+                    if ($scope.terCriteria === 2) {
+                        if ($scope.terCriteria_nombre !== null) {
+                            $scope.data_consultas = $filter('filter')($scope.data_consultas, $scope.terCriteria_nombre);
+                        }
+                    }
+
+
+                    alert($scope.terCriteria_nombre + ' ' +$scope.terCriteria_tipo +' ' + $scope.terCriteria_tipo + ' ' + $scope.data_consultas.length);
+                    if ($scope.terCriteria === 3) {
+                        if ($scope.terCriteria_tipo !== null) {
+                            $scope.data_consultas = $filter('filter')($scope.data_consultas, $scope.terCriteria_tipo);
+                            alert($scope.data_consultas.length);
+                        }
+                        if ($scope.terCriteria_ciudad !== null) {
+                            $scope.data_consultas = $filter('filter')($scope.data_consultas, $scope.terCriteria_ciudad);
+                            alert($scope.data_consultas.length);
+                        }
+                    }*/
+
+                    if ($scope.prodCriteria === 2) {
+                        if ($scope.prodCriteria_nombre !== '' || $scope.prodCriteria_zona !== '') {
+                            $scope.data_consultas = $filter('filter')($scope.data_consultas, $scope.prodCriteria_nombre);
+                            $scope.data_consultas = $filter('filter')($scope.data_consultas, $scope.prodCriteria_zona);
+                        }else{
+                            alert('Escoja un producto y un almacen');
+                        }
+                    }
+                    $scope.data_query = $scope.data_consultas;
+                });
+            }
+
+            $scope.toggleTable = function(){
+                $scope.showTableConsultas = true;
+            }
+
+            angular.extend(this, $controller('regdocumentos-Ctrl', {
+                $scope: $scope
+            }));
+            angular.extend(this, $controller('ZSCtrl', {
+                $scope: $scope
+            }));
+            angular.extend(this, $controller('documentos-Ctrl', {
+                $scope: $scope
+            }));
+
+            angular.extend(this, $controller('productos-Ctrl', {
+                $scope: $scope
+            }));
+        });
+        app.controller('informes-Ctrl', function($scope, $controller, $http, $filter) {
             $scope.data_consultas       = [];
             $scope.data_query           = [];
             $scope.fechaIni             = '';

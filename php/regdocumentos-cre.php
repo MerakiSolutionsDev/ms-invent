@@ -49,11 +49,10 @@
             $_BULTOS        = mysqli_real_escape_string($connect, $data[$i]->BULTOS);
             $_PRESENTACION  = mysqli_real_escape_string($connect, $data[$i]->PRESENTACION);
             $_FLETE         = mysqli_real_escape_string($connect, $data[$i]->FLETE);
-            $_ENTRADA       = mysqli_real_escape_string($connect, $data[$i]->ENTRADA);
-            $_SALIDA        = mysqli_real_escape_string($connect, $data[$i]->SALIDA);
-            $_STOCK         = mysqli_real_escape_string($connect, $data[$i]->STOCK);
+            $_INICIO       = mysqli_real_escape_string($connect, $data[$i]->INICIO);
+            $_FIN        = mysqli_real_escape_string($connect, $data[$i]->FIN);
 
-            $query2 = "INSERT INTO `regdocumentos` (id_transaction,id_resumen,doc,alm,fch_mov, tipo_mov,tipo_tran,nom_cliente,fa,prod,tm,bultos,presentacion,flete,entrada,salida,stock) VALUES ('$_CORR','$id_resumen','$_DOC','$_ALM','$_FCH_MOV','$_TIPO_MOV','$_TIPO_TRAN','$_NOM_CLIENTE','$_FA','$_PROD','$_TM','$_BULTOS','$_PRESENTACION','$_FLETE','$_ENTRADA','$_SALIDA','$_STOCK')";
+            $query2 = "INSERT INTO `regdocumentos` (id_transaction,id_resumen,doc,alm,fch_mov, tipo_mov,tipo_tran,nom_cliente,fa,prod,tm,bultos,presentacion,flete,inicio,fin) VALUES ('$_CORR','$id_resumen','$_DOC','$_ALM','$_FCH_MOV','$_TIPO_MOV','$_TIPO_TRAN','$_NOM_CLIENTE','$_FA','$_PROD','$_TM','$_BULTOS','$_PRESENTACION','$_FLETE','$_INICIO','$_FIN')";
 
             if(mysqli_query($connect,$query2)){
                 $counter = $counter + 1;

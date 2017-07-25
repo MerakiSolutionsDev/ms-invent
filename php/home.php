@@ -587,7 +587,7 @@
                             <div class="w3-row-padding w3-margin-top">
                                 <div class="w3-col m3 l3">
                                     <label class="w3-center" >Stock</labe>
-                                    <input id="productos-InputStock" class="meraki-font-s5 w3-input w3-border w3-round-medium" type="number" name="stock_productos" ng-model="stock" min="0" value="0">
+                                    <input id="productos-InputStock" class="meraki-font-s5 w3-input w3-border w3-round-medium" type="number" name="stock_productos" ng-model="stock" min="0" value="0" step="0.01">
                                 </div>
                                 <div class="w3-col m3 l3">
                                     <label class="w3-center" >S.Emergencia</label>
@@ -883,7 +883,7 @@
                                 <h4 class="meraki-font-s6 meraki-border-bottom">BULTOS</h4>
                             </div>
                             <div class="w3-col m6 l3">
-                                <input class="w3-input w3-ana-508 w3-xlarge w3-text-bold w3-round-medium" type="text" name="" value="{{bultos | number}}" disabled>
+                                <input class="w3-input w3-ana-508 w3-xlarge w3-text-bold w3-round-medium" type="text" name="" value="{{bultos}}" disabled>
                             </div>
                         </div>
 
@@ -925,9 +925,8 @@
                             <th>BULTOS</th>
                             <th>PRESENTACION</th>
                             <th>FLETE</th>
-                            <th>ENTRADA</th>
-                            <th>SALIDA</th>
-                            <th>STOCK</th>
+                            <th>INICIO</th>
+                            <th>FIN</th>
                         </tr>
                         <tr class="resumen-table w3-hover-blue-gray" ng-repeat="x in DataCollected | filter:regdocumentos_resumen_filter" onclick="activeLink(event, 'resumen-table')">
                             <td>{{ $index + 1 }}</td>
@@ -943,9 +942,9 @@
                             <td>{{ x.BULTOS }}</td>
                             <td>{{ x.PRESENTACION }}</td>
                             <td>{{ x.FLETE }}</td>
-                            <td>{{ x.ENTRADA }}</td>
-                            <td>{{ x.SALIDA }}</td>
-                            <td>{{ DataCollected[$index].STOCK_ACTUAL }}</td>
+                            <td>{{ x.INICIO }}</td>
+                            <td>{{ x.FIN }}</td>
+                            <td style="display:none;">{{ DataCollected[$index].STOCK_ACTUAL }}</td>
                         </tr>
                     </table>
                 </div>
@@ -1448,6 +1447,7 @@
 
             $scope.calcBultos = function(){
                 $scope.bultos = ($scope.cantidad * 1000) / $scope.factorMov;
+                $scope.bultos = $scope.bultos.toFixed(2);
             }
 
             $scope.showFactor = function(myE, prodID) {
@@ -1578,7 +1578,7 @@
                 if (collect) {
 
                     $scope.fecha = $filter('date')($scope.fecha, 'y-MM-dd');
-                    //$scope.bultos = $filter('number')($scope.bultos);
+
                     //alert('workIndex: ' + $scope.workProdIndex);
 
                     if ($scope.docNat === 'salida') {
@@ -1600,7 +1600,28 @@
 
                         }
                         //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
-                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":'',"SALIDA":$scope.cantidad, "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock, "PROD_ID":$scope.productId,"CORR":$scope.correlativo};
+
+
+
+                        if ($scope.DataCollected.length === 0) {
+                            var tempDataCollected = {"DOC":$scope.docAbrev+'.'+$scope.correlativo+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"INICIO":$scope.stock, "FIN":$scope.temp_stock[$scope.workProdIndex - 1].stock, "PROD_ID":$scope.productId,"CORR":$scope.correlativo};
+                        }else {
+                            var found = false;
+                            for (var i = $scope.DataCollected.length-1; i >= 0 ; i--) {
+
+                                if($scope.productId === $scope.DataCollected[i].PROD_ID){
+                                    if (!found) {
+                                        found = true;
+                                        //alert(i+'  '+$scope.DataCollected[i].FIN);
+                                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+$scope.correlativo+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"INICIO":$scope.DataCollected[i].FIN, "FIN":$scope.temp_stock[$scope.workProdIndex - 1].stock, "PROD_ID":$scope.productId,"CORR":$scope.correlativo};
+                                    }
+                                }
+                            }
+                            if (!found) {
+                                var tempDataCollected = {"DOC":$scope.docAbrev+'.'+$scope.correlativo+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"INICIO":$scope.stock, "FIN":$scope.temp_stock[$scope.workProdIndex - 1].stock, "PROD_ID":$scope.productId,"CORR":$scope.correlativo};
+                            }
+                        }
+                        //var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":'',"SALIDA":$scope.cantidad, "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock, "PROD_ID":$scope.productId,"CORR":$scope.correlativo};
                         //var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":$scope.cantidad,"SPUnitario":$scope.price,"STotal":$scope.price*$scope.cantidad,"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }else if ($scope.docNat === 'entrada') {
                         if ($scope.temp_stock[$scope.workProdIndex - 1].stock === 0) {
@@ -1609,10 +1630,28 @@
                             $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock + $scope.cantidad;
                         }
                         //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
-                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":$scope.cantidad,"SALIDA":'', "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock,"PROD_ID":$scope.productId,"CORR":$scope.correlativo};
+                        if ($scope.DataCollected.length === 0) {
+                            var tempDataCollected = {"DOC":$scope.docAbrev+'.'+$scope.correlativo+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"INICIO":$scope.stock, "FIN":$scope.temp_stock[$scope.workProdIndex - 1].stock, "PROD_ID":$scope.productId,"CORR":$scope.correlativo};
+                        }else {
+                            var found = false;
+                            for (var i = $scope.DataCollected.length-1; i >= 0 ; i--) {
+
+                                if($scope.productId === $scope.DataCollected[i].PROD_ID){
+                                    if (!found) {
+                                        found = true;
+                                        //alert(i+'  '+$scope.DataCollected[i].FIN);
+                                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+$scope.correlativo+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"INICIO":$scope.DataCollected[i].FIN, "FIN":$scope.temp_stock[$scope.workProdIndex - 1].stock, "PROD_ID":$scope.productId,"CORR":$scope.correlativo};
+                                    }
+                                }
+                            }
+                            if (!found) {
+                                var tempDataCollected = {"DOC":$scope.docAbrev+'.'+$scope.correlativo+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"INICIO":$scope.stock, "FIN":$scope.temp_stock[$scope.workProdIndex - 1].stock, "PROD_ID":$scope.productId,"CORR":$scope.correlativo};
+                            }
+                        }
+                        //var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":$scope.cantidad,"SALIDA":'', "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock,"PROD_ID":$scope.productId,"CORR":$scope.correlativo};
                         //var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":$scope.cantidad,"EPUnitario":$scope.price,"ETotal":$scope.price*$scope.cantidad,"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }else if ($scope.docNat === 'ajuste') {
-                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":'',"SALIDA":'', "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock,"PROD_ID":$scope.productId,"CORR":$scope.correlativo};
+                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"INICIO":'',"FIN":$scope.temp_stock[$scope.workProdIndex - 1].stock,"PROD_ID":$scope.productId,"CORR":$scope.correlativo};
                         //var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }
 
@@ -1690,16 +1729,17 @@
                             cache: $templateCache,
                             data: $scope.DataCollected
                         }).then(function(response){
+                            if (response.data == 'Operación Registrada') {
+                                $http({
+                                    method: 'POST',
+                                    url: '../php/update-stock.php',
+                                    cache: $templateCache,
+                                    data: $scope.temp_stock
+                                }).then(function(response){
+                                    $scope.updateProductosTable();
+                                });
+                            }
                             alert(response.data);
-                        });
-
-                        $http({
-                            method: 'POST',
-                            url: '../php/update-stock.php',
-                            cache: $templateCache,
-                            data: $scope.temp_stock
-                        }).then(function(response){
-                            $scope.updateProductosTable();
                         });
                     }
 

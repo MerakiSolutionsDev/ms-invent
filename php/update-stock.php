@@ -40,7 +40,7 @@
         if($counter > 0){
             echo "Stock Actualizado";
         }else{
-            echo "Revise su conexión a internet";
+            echo "Revise su conexión a internet : //stock";
         }
         mysqli_close($connect);
     }

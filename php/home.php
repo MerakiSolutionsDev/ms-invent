@@ -883,7 +883,7 @@
                                 <h4 class="meraki-font-s6 meraki-border-bottom">BULTOS</h4>
                             </div>
                             <div class="w3-col m6 l3">
-                                <input class="w3-input w3-ana-508 w3-xlarge w3-text-bold w3-round-medium" type="text" name="" value="{{bultos}}" disabled>
+                                <input class="w3-input w3-ana-508 w3-xlarge w3-text-bold w3-round-medium" type="text" name="" value="{{bultos | number}}" disabled>
                             </div>
                         </div>
 
@@ -1450,11 +1450,11 @@
                 $scope.compra = row[0].cells[8].innerHTML;
                 $scope.bultos = ($scope.cantidad * 1000) / $scope.factorMov;
                 $scope.setDocTipo();
-                // alert('prodID: ' + prodID);
+                //alert('prodID: ' + prodID);
                 if (prodID !== $scope.workProdIndex) {
 
                     $scope.workProdIndex = prodID;
-                    // alert('outside' + ' ' + $scope.temp_stock);
+                    //alert('outside' + ' ' + $scope.temp_stock);
                     if ($scope.temp_stock.length === 0) {
                         $scope.temp_stock.push({"index":$scope.workProdIndex,"stock":0});
                         $scope.workProdIndex = 1;
@@ -1468,12 +1468,14 @@
                             }
                         }
                         if (!already) {
-                            // alert('item added');
+                            //alert('item added'+ ' ' + $scope.temp_stock+ ' ' + $scope.workProdIndex);
                             $scope.temp_stock.push({"index":$scope.workProdIndex,"stock":0});
+                            $scope.workProdIndex = $scope.temp_stock.length;
                         }
                     }
 
                 }
+                //alert('workProdIndex'+ ' ' + $scope.workProdIndex);
 
             }
 
@@ -1548,6 +1550,14 @@
                     collect = true;
                 }
 
+                if ($scope.bultos === 0) {
+                    alert('Seleccione un producto');
+                    collect = false;
+                    return;
+                }else {
+                    collect = true;
+                }
+
                 if ($scope.cantidad === 0) {
                     alert('Asigne una cantidad');
                     collect = false;
@@ -1557,6 +1567,7 @@
                 if (collect) {
 
                     $scope.fecha = $filter('date')($scope.fecha, 'y-MM-dd');
+                    //$scope.bultos = $filter('number')($scope.bultos);
                     //alert('workIndex: ' + $scope.workProdIndex);
 
                     if ($scope.docNat === 'salida') {
@@ -1578,7 +1589,7 @@
 
                         }
                         //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
-                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":'',"SALIDA":$scope.cantidad, "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":'',"SALIDA":$scope.cantidad, "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock, "PROD_ID":$scope.productId};
                         //var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":$scope.cantidad,"SPUnitario":$scope.price,"STotal":$scope.price*$scope.cantidad,"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }else if ($scope.docNat === 'entrada') {
                         if ($scope.temp_stock[$scope.workProdIndex - 1].stock === 0) {
@@ -1587,14 +1598,15 @@
                             $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock + $scope.cantidad;
                         }
                         //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
-                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":$scope.cantidad,"SALIDA":'', "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":$scope.cantidad,"SALIDA":'', "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock,"PROD_ID":$scope.productId};
                         //var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":$scope.cantidad,"EPUnitario":$scope.price,"ETotal":$scope.price*$scope.cantidad,"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }else if ($scope.docNat === 'ajuste') {
-                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":'',"SALIDA":'', "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock};
+                        var tempDataCollected = {"DOC":$scope.docAbrev+'.'+'832'+'.'+$scope.fechaEspecial+'.'+$scope.almacen,"ALM":$scope.almacen,"FCH_MOV":$scope.fecha,"TIPO_MOV":$scope.docNat,"TIPO_TRAN":$scope.regdocumentos_documento,"NOM_CLIENTE":$scope.regdocumentos_tercero,"FA":$scope.factura,"PROD":$scope.product,"TM":$scope.cantidad,"BULTOS":$scope.bultos,"PRESENTACION":$scope.productUnidad,"FLETE":$scope.flete,"ENTRADA":'',"SALIDA":'', "STOCK_ACTUAL":$scope.temp_stock[$scope.workProdIndex - 1].stock,"PROD_ID":$scope.productId};
                         //var tempDataCollected = {"Fecha":$scope.fecha,"Doc":$scope.regdocumentos_documento,"Docnum":$scope.docNum,"Guia":$scope.guia,"Tercero":$scope.regdocumentos_tercero,"Detalle":$scope.detalle,"IDProd":$scope.productId,"Prod":$scope.product,"Moneda":$scope.moneda,"ECantidad":'',"EPUnitario":'',"ETotal":'',"SCantidad":'',"SPUnitario":'',"STotal":'',"Stock":$scope.temp_stock[$scope.workProdIndex - 1].stock};
                     }
 
                     $scope.DataCollected.push(tempDataCollected);
+                    //alert('workindex'+$scope.workProdIndex);
                 }
             }
 
@@ -1603,10 +1615,16 @@
                     if (confirm("Descartar último ingreso a resumen ?")) {
 
                         if ($scope.docNat === 'salida') {
-                            $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock + Number($scope.DataCollected[$scope.DataCollected.length -1].SCantidad || 0);
+                            alert($scope.docNat+''+$scope.workProdIndex);
+                            $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock + Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0);
+                            alert($scope.DataCollected[$scope.DataCollected.length -1].TM);
+                            alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
                         }
                         if ($scope.docNat === 'entrada') {
-                            $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock - Number($scope.DataCollected[$scope.DataCollected.length -1].ECantidad || 0);
+                            //alert($scope.docNat+''+$scope.workProdIndex);
+                            $scope.temp_stock[$scope.workProdIndex - 1].stock = $scope.temp_stock[$scope.workProdIndex - 1].stock - Number($scope.DataCollected[$scope.DataCollected.length -1].TM || 0);
+                            //alert($scope.DataCollected[$scope.DataCollected.length -1].TM);
+                            //alert($scope.temp_stock[$scope.workProdIndex - 1].stock);
                         }
 
                         $scope.DataCollected.pop();

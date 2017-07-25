@@ -18,7 +18,7 @@
     }
 
     if (isset($_POST['Modificar-productos'])) {
-        $sql = "UPDATE productos SET grupo = '".$_POST['grupo_productos']."', igv = '".$_POST['igv_productos']."', nombre = '".$_POST['nombre_productos']."', unidad = '".$_POST['unidad_productos']."', peso = '".$_POST['peso_productos']."', factor = '".$_POST['factor_productos']."', stock = '".$_POST['stock_productos']."', stocke = '".$_POST['stocke_productos']."', offset_stocka = '".$_POST['offset_productos']."', stocka = '".$_POST['stocka_productos']."', moneda = '".$_POST['moneda_productos']."', compra = '".$_POST['compra_productos']."' WHERE id = '".$_POST['ID_productos_form']."'";
+        $sql = "UPDATE productos SET grupo = '".$_POST['grupo_productos']."', igv = '".$_POST['igv_productos']."', alm = '".$_POST['zona_productos']."', nombre = '".$_POST['nombre_productos']."', unidad = '".$_POST['unidad_productos']."', peso = '".$_POST['peso_productos']."', factor = '".$_POST['factor_productos']."', stock = '".$_POST['stock_productos']."', stocke = '".$_POST['stocke_productos']."', offset_stocka = '".$_POST['offset_productos']."', stocka = '".$_POST['stocka_productos']."', moneda = '".$_POST['moneda_productos']."', compra = '".$_POST['compra_productos']."' WHERE id = '".$_POST['ID_productos_form']."'";
 
         if (mysqli_query($conn, $sql)){
             print_r("Producto Actualizado!");

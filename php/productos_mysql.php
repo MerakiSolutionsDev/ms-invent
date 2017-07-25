@@ -24,6 +24,7 @@
         $outp .= '{"ID":"' . $row['id'] . '",';
         $outp .= '"Grupo":"' . $row['grupo'] . '",';
         $outp .= '"IGV":"' . $row['igv'] . '",';
+        $outp .= '"Alm":"' . $row['alm'] . '",';
         $outp .= '"Nombre":"' . $row['nombre'] . '",';
         $outp .= '"Unidad":"' . $row['unidad'] . '",';
         $outp .= '"Peso":"' . $row['peso'] . '",';
